@@ -34,8 +34,12 @@
           <option name="url" value="https://hikaruu@bitbucket.org/HikaTeam/vchat.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://hikaruu@bitbucket.org/hikaruu/vchat.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
-    <option name="cloneParentDir" value="F:\android-studio" />
+    <option name="cloneParentDir" value="F:\" />
   </component>
 </application>
