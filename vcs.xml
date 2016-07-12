@@ -58,6 +58,10 @@
           <option name="url" value="https://github.com/2dxgujun/AndroidTagGroup.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/yuvaraj119/Picasso-RecyclerView-StaggeredGridLayoutManager.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="F:\" />
