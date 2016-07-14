@@ -70,6 +70,10 @@
           <option name="url" value="https://github.com/andrzejchm/Droid_MVP.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/antoniolg/androidmvp.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="F:\" />
