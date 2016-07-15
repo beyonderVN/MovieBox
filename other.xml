@@ -74,6 +74,7 @@
   <component name="RefactoringSettings">
     <option name="RENAME_SEARCH_FOR_TEXT_FOR_CLASS" value="false" />
     <option name="MOVE_PREVIEW_USAGES" value="false" />
+    <option name="EXTRACT_INTERFACE_JAVADOC" value="1" />
     <option name="EXTRACT_SUPERCLASS_JAVADOC" value="1" />
     <option name="INTRODUCE_LOCAL_CREATE_FINALS" value="false" />
   </component>
