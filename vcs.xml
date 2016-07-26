@@ -82,6 +82,10 @@
           <option name="url" value="https://github.com/android10/Android-CleanArchitecture.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/ReactiveX/RxAndroid.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="F:\" />
