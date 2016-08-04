@@ -94,6 +94,10 @@
           <option name="url" value="https://github.com/daimajia/AndroidImageSlider.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/chenupt/SpringIndicator" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="F:\" />
