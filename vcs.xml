@@ -110,6 +110,10 @@
           <option name="url" value="https://github.com/magiepooh/RecyclerItemDecoration.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/amitshekhariitbhu/RxJava2-Android-Samples.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="F:\" />
