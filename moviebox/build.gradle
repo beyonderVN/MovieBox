@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply from: '../quality_tools/findbugs.gradle'
+apply plugin: 'com.fernandocejas.frodo'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "com.longngo.moviebox"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        buildConfigField("String", "MOVIE_API_URL",
+                "\"${movieDbApiUrl}\"")
+        buildConfigField("String", "MOVIE_API_KEY",
+                "\"${movieDbApiKey}\"")
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    final RETROFIT_VERSION = '2.0.0'
+    final OKHTTP_VERSION = '3.3.1'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:palette-v7:$rootProject.ext.supportLibraryVersion"
+    compile 'com.jakewharton:butterknife:8.1.0'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'javax.annotation:jsr250-api:1.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'me.gujun.android.taggroup:library:1.4@aar'
+    compile 'com.google.dagger:dagger:2.5'
+    compile 'com.google.code.findbugs:annotations:2.0.3'
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    apt 'com.google.dagger:dagger-compiler:2.5'
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+    compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
+    compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
+    testCompile 'junit:junit:4.12'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+}
