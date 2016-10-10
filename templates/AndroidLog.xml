@@ -1,0 +1,10 @@
+<templateSet group="AndroidLog">
+  <template name="logds" value="android.util.Log.d(&quot;$NAME$&quot;, &quot;$METHOD_NAME$&quot;,&quot;$VAR$&quot;);" description="Log.d(TAG, String)" toReformat="true" toShortenFQNames="true">
+    <variable name="NAME" expression="className()" defaultValue="" alwaysStopAt="false" />
+    <variable name="METHOD_NAME" expression="methodName()" defaultValue="" alwaysStopAt="false" />
+    <variable name="VAR" expression="methodParameters()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>
