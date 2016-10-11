@@ -82,7 +82,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                             Log.d(TAG, "onSuccess: "+competitions.size());
 
                             getPresentationModel().add(competitions);
-                            loadCompetitions();
+                            loadMovies();
 
                         } else {
                             Log.d(TAG, "onSuccess: is empty");
@@ -93,8 +93,8 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
     }
 
     @Override
-    public void loadCompetitions() {
+    public void loadMovies() {
         if(getMvpView()==null)return;
-        getMvpView().loadCompetitions();
+        getMvpView().loadMovies();
     }
 }

@@ -7,11 +7,15 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
+import com.longngo.moviebox.common.DynamicHeightImageView;
+import com.longngo.moviebox.common.ElasticDragDismissFrameLayout;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
@@ -23,12 +27,19 @@ import butterknife.ButterKnife;
 public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailView,DetailPresenter> implements DetailView {
     private static final String TAG = "CompetionDetailActivity";
     public static final String MOVIE_ITEM = "MOVIE_ITEM";
-    @BindView(R.id.ivHeader)
-    ImageView imageView;
-    @BindView(R.id.list)
-    RecyclerView listRV;
 
-    BaseAdapter baseAdapter;
+    @BindView(R.id.activity_detail)
+    ElasticDragDismissFrameLayout draggableFrame;
+    private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
+    @BindView(R.id.ivHeader)
+    DynamicHeightImageView imageView;
+    @BindView(R.id.tvOverview)
+    TextView tvOverview;
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
+    @BindView(R.id.tvReleaseDate)
+    TextView tvReleaseDate;
+
 
     public static Intent getCallingIntent(Context context, BaseVM baseVM){
         Intent intent = new Intent(context, DetailActivity.class);
@@ -45,31 +56,35 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         setupUI();
-        MovieVM movieVM = getItemFromIntent(getIntent());
-        Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2"+movieVM.getMovie().getBackdropPath())
-                .asBitmap().into(imageView);
+
 
     }
     void setupUI(){
-        setupRV();
-        setupToolBar();
+        MovieVM movieVM = getItemFromIntent(getIntent());
+        Glide.with(this)
+                .load("https://image.tmdb.org/t/p/w300_and_h300_bestv2"+movieVM.getMovie().getBackdropPath())
+                .asBitmap().into(imageView);
+        tvOverview.setText(movieVM.getMovie().getOverview());
+        tvTitle.setText(movieVM.getMovie().getTitle());
+        tvReleaseDate.setText(Html.fromHtml("<b>Release Date: </b><small>"+movieVM.getMovie().getReleaseDate()+"<small>"));
+
+
+
+        chromeFader = new ElasticDragDismissFrameLayout.SystemChromeFader(this);
+        draggableFrame.addListener(
+                new ElasticDragDismissFrameLayout.SystemChromeFader(this) {
+                    @Override
+                    public void onDragDismissed() {
+                        supportFinishAfterTransition();
+                    }
+                });
+
     }
-    void setupToolBar(){
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("JavBox");
-    }
-    void setupRV(){
-        listRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        baseAdapter = new BaseAdapter(presenter.getPresentationModel().getVisitableList());
-        listRV.setAdapter(baseAdapter);
     }
 
     @Override
@@ -86,6 +101,18 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
 
     @Override
     public void loadCompetitions() {
-        baseAdapter.notifyDataSetChanged();
+
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // clean up after any fab expansion
+        draggableFrame.addListener(chromeFader);
+    }
+    @Override
+    protected void onPause() {
+        draggableFrame.removeListener(chromeFader);
+        super.onPause();
+    }
+
 }

@@ -9,7 +9,7 @@
                 <shape xmlns:android="http://schemas.android.com/apk/res/android">
                     <gradient android:angle="-90" android:centerColor="#3b666666" android:dither="true"
 
-                        android:endColor="#00006e19" android:startColor="#9a494949"
+                        android:endColor="#00006e19" android:startColor="#ab565656"
 
                         />
                 </shape>

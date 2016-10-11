@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:contentDescription=""
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"

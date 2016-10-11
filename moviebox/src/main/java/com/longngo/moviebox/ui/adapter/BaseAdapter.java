@@ -1,16 +1,20 @@
 package com.longngo.moviebox.ui.adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.longngo.moviebox.ui.activity.base.BasePresentationModel;
 import com.longngo.moviebox.ui.adapter.viewholder.BaseViewHolder;
 import com.longngo.moviebox.ui.adapter.vmfactory.TypeFactoryForListVM;
 import com.longngo.moviebox.ui.adapter.vmfactory.VMTypeFactory;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Created by Long on 10/5/2016.
@@ -19,12 +23,14 @@ import java.util.List;
 public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseVM>> {
     private VMTypeFactory vmTypeFactory = new TypeFactoryForListVM();
     private List<BaseVM> list;
-
-    public BaseAdapter(List<BaseVM> list) {
-        this.list = list;
+    BasePresentationModel basePresentationModel;
+    Activity activity;
+    @Inject
+    public BaseAdapter(Activity activity,BasePresentationModel basePresentationModel) {
+        this.basePresentationModel = basePresentationModel;
+        this.list = basePresentationModel.getVisitableList();
+        this.activity = activity;
     }
-
-
 
     @Override
     public BaseViewHolder<BaseVM> onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +44,7 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseVM>> {
     @Override
     public void onBindViewHolder(BaseViewHolder<BaseVM> holder, int position) {
         if(holder!=null){
-            holder.bind(list.get(position));
+            holder.bind(list.get(position),activity);
         }
     }
 

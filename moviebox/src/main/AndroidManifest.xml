@@ -13,7 +13,8 @@
 
         </activity>
 
-        <activity android:name="com.longngo.moviebox.ui.activity.detail.DetailActivity">
+        <activity android:name="com.longngo.moviebox.ui.activity.detail.DetailActivity"
+            android:theme="@style/AppTheme.Translucent">
 
         </activity>
         <activity-alias

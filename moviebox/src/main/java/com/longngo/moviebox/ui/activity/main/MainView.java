@@ -8,5 +8,5 @@ import com.longngo.moviebox.common.coremvp.MVPView;
  */
 
 public interface MainView extends MVPView {
-    void loadCompetitions();
+    void loadMovies();
 }
