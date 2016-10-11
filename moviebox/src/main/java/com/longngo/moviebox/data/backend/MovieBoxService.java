@@ -3,6 +3,7 @@ package com.longngo.moviebox.data.backend;
 
 import android.util.Log;
 
+import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
@@ -29,7 +30,7 @@ public class MovieBoxService {
         movieBoxServiceApi = footballServiceApi;
     }
 
-
+    @RxLogObservable
     public Observable<List<Movie>> getCompetitions() {
         return movieBoxServiceApi.getMovieList()
                 .map(new Func1<JsonObject, List<Movie>>() {

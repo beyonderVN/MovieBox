@@ -1,4 +1,4 @@
-package com.longngo.moviebox.ui.activity.main;
+package com.longngo.moviebox.ui.activity.detail;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,16 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 
-import com.longngo.moviebox.R;
 import com.longngo.moviebox.FootballFanApplication;
-import com.longngo.moviebox.ui.adapter.BaseAdapter;
+import com.longngo.moviebox.R;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
+import com.longngo.moviebox.ui.adapter.BaseAdapter;
 
 import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity<MainPresentationModel,MainView,MainPresenter> implements MainView{
+public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailView,DetailPresenter> implements DetailView {
     private static final String TAG = "CompetionDetailActivity";
     @BindInt(R.integer.column_num)
     int columnNum;
@@ -74,8 +74,8 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
 
     @NonNull
     @Override
-    protected MainPresentationModel createPresentationModel() {
-        return new MainPresentationModel();
+    protected DetailPresentationModel createPresentationModel() {
+        return new DetailPresentationModel();
     }
 
 

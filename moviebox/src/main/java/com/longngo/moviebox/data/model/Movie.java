@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Long on 10/5/2016.
  */
 
-public class Movie {
+public class Movie implements Serializable{
 
     @SerializedName("poster_path")
     @Expose

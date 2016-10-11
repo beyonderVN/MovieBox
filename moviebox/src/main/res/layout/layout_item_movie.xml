@@ -5,27 +5,29 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/cardview_default_elevation"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
     app:cardUseCompatPadding="true"
-    android:layout_margin="20px"
-    android:id="@+id/parent"
+    app:cardBackgroundColor="@color/cardview_shadow_end_color"
+    android:id="@+id/wrap"
     >
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/image_view"
+        android:layout_height="wrap_content">
+        <com.longngo.moviebox.common.DynamicHeightImageView
+            android:id="@+id/ivBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="vkl" />
+            android:contentDescription=""
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"/>
         <TextView
-            android:id="@+id/des"
+            android:id="@+id/tvTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/gray_alpha"
-            android:padding="12dp"
+            android:padding="@dimen/tv_padding_medium"
             android:layout_gravity="bottom"
-            android:textSize="20sp"
+            android:textSize="@dimen/tv_textsize_large"
             android:textColor="@color/white"
             />
     </FrameLayout>

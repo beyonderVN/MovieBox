@@ -1,4 +1,4 @@
-package com.longngo.moviebox.ui.activity.main;
+package com.longngo.moviebox.ui.activity.detail;
 
 import android.util.Log;
 
@@ -22,20 +22,20 @@ import rx.subscriptions.CompositeSubscription;
  * Created by Admin on 06/10/2016.
  */
 
-public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationModel> implements MainView{
+public class DetailPresenter extends SimpleMVPPresenter<DetailView,DetailPresentationModel> implements DetailView {
     private static final String TAG = "DetailPresenter";
     private BaseSchedulerProvider baseSchedulerProvider;
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
 
     private MoviesRepository competitionsRepository;
     @Inject
-    MainPresenter(BaseSchedulerProvider baseSchedulerProvider, MoviesRepository competitionsRepository) {
+    DetailPresenter(BaseSchedulerProvider baseSchedulerProvider, MoviesRepository competitionsRepository) {
         this.baseSchedulerProvider = baseSchedulerProvider;
         this.competitionsRepository = competitionsRepository;
     }
 
     @Override
-    public void attachView(MainView mvpView, MainPresentationModel presentationModel) {
+    public void attachView(DetailView mvpView, DetailPresentationModel presentationModel) {
         super.attachView(mvpView, presentationModel);
         fetchRepositories("2016");
     }

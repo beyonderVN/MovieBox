@@ -2,11 +2,11 @@ package com.longngo.moviebox.ui.adapter.viewholder;
 
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.longngo.moviebox.R;
+import com.longngo.moviebox.common.DynamicHeightImageView;
 import com.longngo.moviebox.ui.activity.Navigator;
 import com.longngo.moviebox.ui.viewmodel.MovieVM;
 
@@ -19,11 +19,11 @@ import butterknife.ButterKnife;
  */
 
 public class MovieViewHolder extends BaseViewHolder<MovieVM> {
-    @BindView(R.id.parent)
+    @BindView(R.id.wrap)
     CardView cardView;
-    @BindView(R.id.image_view)
-    ImageView imageView;
-    @BindView(R.id.des)
+    @BindView(R.id.ivBackground)
+    DynamicHeightImageView imageView;
+    @BindView(R.id.tvTitle)
     TextView des;
     MovieVM movieVM;
     public MovieViewHolder(View itemView) {
@@ -41,7 +41,7 @@ public class MovieViewHolder extends BaseViewHolder<MovieVM> {
                 Navigator.navigateToCompetionDetailActivity(v.getContext(), movieVM.getMovie());
             }
         });
-
+//        imageView.setRatio(1.5);
         Glide.with(itemView.getContext())
                 .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2"+item.getMovie().getBackdropPath())
                 .asBitmap().into(imageView);

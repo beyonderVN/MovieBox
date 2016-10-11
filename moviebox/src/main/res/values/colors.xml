@@ -5,6 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="gray">#cacaca</color>
-    <color name="gray_alpha">#4acacaca</color>
+    <color name="gray_alpha">#4a5b5b5b</color>
     <color name="white">#ffffff</color>
+    <color name="tran">#00ffffff</color>
 </resources>

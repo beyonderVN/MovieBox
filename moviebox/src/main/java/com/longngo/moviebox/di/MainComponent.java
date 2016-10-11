@@ -1,10 +1,9 @@
-package com.longngo.moviebox.common.di;
+package com.longngo.moviebox.di;
 
 import android.content.Context;
 
 import com.longngo.moviebox.common.schedulers.BaseSchedulerProvider;
 import com.longngo.moviebox.data.backend.MovieBoxService;
-import com.longngo.moviebox.ui.activity.detail.DetailActivity;
 import com.longngo.moviebox.ui.activity.main.MainActivity;
 
 import javax.inject.Singleton;
@@ -23,5 +22,6 @@ public interface MainComponent {
     void inject(MainActivity mainActivity);
 
 
-    void inject(DetailActivity detailActivity);
+
+
 }
