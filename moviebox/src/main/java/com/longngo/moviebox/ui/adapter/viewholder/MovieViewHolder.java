@@ -2,12 +2,9 @@ package com.longngo.moviebox.ui.adapter.viewholder;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -55,9 +52,10 @@ public class MovieViewHolder extends BaseViewHolder<MovieVM> {
                 Navigator.navigateToDetailActivity(v.getContext(), movieVM,ops);
             }
         });
-//        imageView.setRatio(1.5);
+        imageView.setRatio(1.5);
         Glide.with(itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w300_and_h300_bestv2"+item.getMovie().getBackdropPath())
+                .load("https://image.tmdb.org/t/p/w342"+item.getMovie().getPosterPath())
+                .asBitmap()
                 .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
                 .into(imageView);
 

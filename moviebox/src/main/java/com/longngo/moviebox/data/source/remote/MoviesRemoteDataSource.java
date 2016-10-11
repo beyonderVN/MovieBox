@@ -27,7 +27,7 @@ public class MoviesRemoteDataSource implements MoviesDataSource {
 
     @Override
     public Observable<List<Movie>> getMovieList(int page) {
-        return FootballFanApplication.getMainComponent().dataManager().getCompetitions(page);
+        return FootballFanApplication.getMainComponent().dataManager().getMovies(page);
     }
     @Override
     public void saveCompetition(Movie competition) {

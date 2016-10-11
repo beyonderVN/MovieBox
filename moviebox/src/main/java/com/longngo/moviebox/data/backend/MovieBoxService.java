@@ -12,6 +12,7 @@ import com.longngo.moviebox.data.model.Movie;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -31,7 +32,7 @@ public class MovieBoxService {
     }
 
     @RxLogObservable
-    public Observable<List<Movie>> getCompetitions() {
+    public Observable<List<Movie>> getMovies() {
         return movieBoxServiceApi.getMovieList()
                 .map(new Func1<JsonObject, List<Movie>>() {
                     @Override
@@ -45,8 +46,9 @@ public class MovieBoxService {
     }
 
     @RxLogObservable
-    public Observable<List<Movie>> getCompetitions(int page) {
+    public Observable<List<Movie>> getMovies(int page) {
         return movieBoxServiceApi.getMovieList(page)
+                .delay(2, TimeUnit.SECONDS)
                 .map(new Func1<JsonObject, List<Movie>>() {
                     @Override
                     public List<Movie> call(JsonObject jsonObject) {

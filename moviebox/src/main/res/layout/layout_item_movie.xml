@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:contentDescription=""
             android:adjustViewBounds="true"
-            android:scaleType="fitXY"/>
+            android:scaleType="fitXY"
+            />
 
         <TextView
             android:id="@+id/tvTitle"

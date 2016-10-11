@@ -4,11 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Html;
-import android.widget.ImageView;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +14,6 @@ import com.longngo.moviebox.R;
 import com.longngo.moviebox.common.DynamicHeightImageView;
 import com.longngo.moviebox.common.ElasticDragDismissFrameLayout;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
-import com.longngo.moviebox.ui.adapter.BaseAdapter;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
 import com.longngo.moviebox.ui.viewmodel.MovieVM;
 
@@ -61,9 +57,13 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
     }
     void setupUI(){
         MovieVM movieVM = getItemFromIntent(getIntent());
+        Log.d(TAG, "setupUI: "+"https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getBackdropPath());
+        Log.d(TAG, "setupUI: "+"https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath());
+        imageView.setRatio(1.5);
         Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w300_and_h300_bestv2"+movieVM.getMovie().getBackdropPath())
-                .asBitmap().into(imageView);
+                .load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
+                .asBitmap()
+                .into(imageView);
         tvOverview.setText(movieVM.getMovie().getOverview());
         tvTitle.setText(movieVM.getMovie().getTitle());
         tvReleaseDate.setText(Html.fromHtml("<b>Release Date: </b><small>"+movieVM.getMovie().getReleaseDate()+"<small>"));
