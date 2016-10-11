@@ -44,5 +44,19 @@ public class MovieBoxService {
                 });
     }
 
+    @RxLogObservable
+    public Observable<List<Movie>> getCompetitions(int page) {
+        return movieBoxServiceApi.getMovieList(page)
+                .map(new Func1<JsonObject, List<Movie>>() {
+                    @Override
+                    public List<Movie> call(JsonObject jsonObject) {
+                        Log.d(TAG, "getMovieList: "+jsonObject.toString());
+                        Type listType = new TypeToken<ArrayList<Movie>>(){}.getType();
+                        List<Movie> movies = (new Gson()).fromJson(jsonObject.getAsJsonArray("results"),listType);
+                        return movies;
+                    }
+                });
+    }
+
 
 }
