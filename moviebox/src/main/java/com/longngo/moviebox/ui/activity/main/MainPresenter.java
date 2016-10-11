@@ -7,9 +7,11 @@ import com.longngo.moviebox.common.schedulers.BaseSchedulerProvider;
 import com.longngo.moviebox.data.model.Movie;
 import com.longngo.moviebox.data.source.MoviesRepository;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
+import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
 import com.longngo.moviebox.ui.viewmodel.mapper.Mapper;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -23,7 +25,7 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationModel> implements MainView{
-    private static final String TAG = "DetailPresenter";
+    private static final String TAG = "MainPresenter";
     private BaseSchedulerProvider baseSchedulerProvider;
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
 
@@ -37,7 +39,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
     @Override
     public void attachView(MainView mvpView, MainPresentationModel presentationModel) {
         super.attachView(mvpView, presentationModel);
-        fetchRepositories("2016");
+        fetchRepositoryFirst();
     }
 
     @Override
@@ -46,16 +48,13 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
         mSubscriptions.unsubscribe();
     }
 
-    public void fetchRepositories(String season){
+    public void fetchRepositoryFirst(){
         if (!getPresentationModel().isShouldFetchRepositories()) {
             return;
         }
-        getCompetitions(season);
-    }
-    private void getCompetitions(String season) {
         mSubscriptions.clear();
         Subscription subscription = competitionsRepository
-                .getMovieList()
+                .getMovieList(getPresentationModel().getNextPage())
                 .map(new Func1<List<Movie>, List<BaseVM>>() {
                     @Override
                     public List<BaseVM> call(List<Movie> competitions) {
@@ -67,12 +66,12 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                 .subscribe(new Observer<List<BaseVM>>() {
                     @Override
                     public void onCompleted() {
-
+                        Log.d(TAG, "onCompleted: ");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e(TAG, "onError: ", e);
                     }
 
                     @Override
@@ -82,8 +81,8 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                             Log.d(TAG, "onSuccess: "+competitions.size());
 
                             getPresentationModel().add(competitions);
-                            loadMovies();
-
+                            updateView();
+                            getPresentationModel().setCurrentPage(getPresentationModel().getCurrentPage()+1);
                         } else {
                             Log.d(TAG, "onSuccess: is empty");
                         }
@@ -91,10 +90,63 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                 });
         mSubscriptions.add(subscription);
     }
+    public void fetchMore(){
 
+        mSubscriptions.clear();
+        Subscription subscription = competitionsRepository
+                .getMovieList(getPresentationModel().getNextPage())
+                .map(new Func1<List<Movie>, List<BaseVM>>() {
+                    @Override
+                    public List<BaseVM> call(List<Movie> competitions) {
+                        return Mapper.tranCompetition(competitions);
+                    }
+                })
+                .subscribeOn( baseSchedulerProvider.computation())
+                .observeOn( baseSchedulerProvider.ui())
+                .subscribe(new Observer<List<BaseVM>>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.d(TAG, "onCompleted: ");
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e(TAG, "onError: ", e);
+                    }
+
+                    @Override
+                    public void onNext(List<BaseVM> competitions) {
+                        Log.d(TAG, "onNext: "+competitions.size());
+                        if (!competitions.isEmpty()) {
+                            Log.d(TAG, "onSuccess: "+competitions.size());
+                            getPresentationModel().stopLoadingMore();
+                            getPresentationModel().add(competitions);
+                            getPresentationModel().setCurrentPage(getPresentationModel().getCurrentPage()+1);
+                            getPresentationModel().setLoadingMore(false);
+                            updateView();
+                        } else {
+                            Log.d(TAG, "onSuccess: is empty");
+                        }
+                    }
+                });
+        mSubscriptions.add(subscription);
+    }
     @Override
-    public void loadMovies() {
+    public void updateView() {
         if(getMvpView()==null)return;
-        getMvpView().loadMovies();
+        getMvpView().updateView();
+    }
+
+    public void loadMore() {
+        getPresentationModel().setLoadingMore(true);
+        getPresentationModel().add(new LoadingMoreVM());
+        updateView();
+        fetchMore();
+    }
+
+    public void refreshData() {
+        getPresentationModel().reset();
+        fetchRepositoryFirst();
     }
 }

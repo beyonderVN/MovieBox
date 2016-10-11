@@ -31,7 +31,7 @@ public class DynamicHeightImageView extends ImageView {
 			int width = getMeasuredWidth();
 			int height = (int)(whRatio * width);
 			setMeasuredDimension(width, height);
-			Log.d(TAG, "onMeasure: "+whRatio);
+//			Log.d(TAG, "onMeasure: "+whRatio);
 		}else{
 			int width = getMeasuredWidth();
 			int height = getMeasuredHeight();

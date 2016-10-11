@@ -12,7 +12,8 @@ import rx.Observable;
 
 public interface MoviesDataSource {
 
-    Observable<List<Movie>> getMovieList();
+
+    Observable<List<Movie>> getMovieList(int page);
 
     void saveCompetition(Movie competition);
 }

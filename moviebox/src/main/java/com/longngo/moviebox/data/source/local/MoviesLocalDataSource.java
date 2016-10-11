@@ -76,7 +76,7 @@ public class MoviesLocalDataSource implements MoviesDataSource {
         INSTANCE = null;
     }
 
-    @Override
+
     public Observable<List<Movie>> getMovieList() {
         String[] projection = {
                 MoviesPersistenceContract.CompetitionEntry.COLUMN_NAME_ENTRY_ID,
@@ -90,6 +90,11 @@ public class MoviesLocalDataSource implements MoviesDataSource {
         String sql = String.format("SELECT %s FROM %s", TextUtils.join(",", projection), MoviesPersistenceContract.CompetitionEntry.TABLE_NAME);
         return mDatabaseHelper.createQuery(MoviesPersistenceContract.CompetitionEntry.TABLE_NAME, sql)
                 .mapToList(mCompetitionMapperFunction);
+    }
+
+    @Override
+    public Observable<List<Movie>> getMovieList(int page) {
+        return null;
     }
 
     @Override

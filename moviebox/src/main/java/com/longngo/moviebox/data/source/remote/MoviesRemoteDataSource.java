@@ -24,11 +24,11 @@ public class MoviesRemoteDataSource implements MoviesDataSource {
 
     // Prevent direct instantiation.
     private MoviesRemoteDataSource() {}
-    @Override
-    public Observable<List<Movie>> getMovieList() {
-        return FootballFanApplication.getMainComponent().dataManager().getCompetitions();
-    }
 
+    @Override
+    public Observable<List<Movie>> getMovieList(int page) {
+        return FootballFanApplication.getMainComponent().dataManager().getCompetitions(page);
+    }
     @Override
     public void saveCompetition(Movie competition) {
 

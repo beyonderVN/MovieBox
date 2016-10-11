@@ -55,7 +55,7 @@ public class DetailPresenter extends SimpleMVPPresenter<DetailView,DetailPresent
     private void getCompetitions(String season) {
         mSubscriptions.clear();
         Subscription subscription = competitionsRepository
-                .getMovieList()
+                .getMovieList(1)
                 .map(new Func1<List<Movie>, List<BaseVM>>() {
                     @Override
                     public List<BaseVM> call(List<Movie> competitions) {

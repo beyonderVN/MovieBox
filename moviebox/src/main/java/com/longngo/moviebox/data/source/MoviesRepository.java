@@ -65,16 +65,18 @@ public class MoviesRepository implements MoviesDataSource {
 
 
 
-    @Override
-    public Observable<List<Movie>> getMovieList() {
-        // Respond immediately with cache if available and not dirty
-        if (mCachedCompetitions != null && !mCacheIsDirty && mCachedCompetitions.values().size()!=0) {
-            return Observable.from(mCachedCompetitions.values()).toList();
-        } else if (mCachedCompetitions == null) {
-            mCachedCompetitions = new LinkedHashMap<>();
-        }
 
-        Observable<List<Movie>> listObservable = getAndSaveRemoteCompetitions();
+
+    @Override
+    public Observable<List<Movie>> getMovieList(int page) {
+        // Respond immediately with cache if available and not dirty
+//        if (mCachedCompetitions != null && !mCacheIsDirty && mCachedCompetitions.values().size()!=0) {
+//            return Observable.from(mCachedCompetitions.values()).toList();
+//        } else if (mCachedCompetitions == null) {
+//            mCachedCompetitions = new LinkedHashMap<>();
+//        }
+
+        Observable<List<Movie>> listObservable = getAndSaveRemoteCompetitions(page);
         return listObservable;
 //        if (mCacheIsDirty) {
 //            return listObservable;
@@ -96,8 +98,8 @@ public class MoviesRepository implements MoviesDataSource {
 
     }
 
-    private Observable<List<Movie>> getAndCacheLocalCompetitions() {
-            return mCompetitionsLocalDataSource.getMovieList()
+    private Observable<List<Movie>> getAndCacheLocalCompetitions(int page) {
+            return mCompetitionsLocalDataSource.getMovieList(page)
                     .flatMap(new Func1<List<Movie>, Observable<List<Movie>>>() {
                         @Override
                         public Observable<List<Movie>> call(List<Movie> movieList) {
@@ -113,9 +115,9 @@ public class MoviesRepository implements MoviesDataSource {
                     });
         }
 
-        private Observable<List<Movie>> getAndSaveRemoteCompetitions() {
+        private Observable<List<Movie>> getAndSaveRemoteCompetitions(int page) {
             return mCompetitionsRemoteDataSource
-                    .getMovieList()
+                    .getMovieList(page)
                     .flatMap(new Func1<List<Movie>, Observable<List<Movie>>>() {
                         @Override
                         public Observable<List<Movie>> call(List<Movie> movieList) {
@@ -124,7 +126,7 @@ public class MoviesRepository implements MoviesDataSource {
                                 public void call(Movie movie) {
                                     Log.d(TAG, "getAndSaveRemoteCompetitions: "+movie.toString());
 //                                    mCompetitionsLocalDataSource.saveCompetition(competition);
-                                    mCachedCompetitions.put(movie.getId(), movie);
+//                                    mCachedCompetitions.put(movie.getId(), movie);
                                 }
                             }).toList();
                         }

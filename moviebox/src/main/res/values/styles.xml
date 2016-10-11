@@ -34,4 +34,8 @@
         <item name="windowNoTitle">true</item>
 
     </style>
+
+    <style name="splashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/ic_android_white_24dp</item>
+    </style>
 </resources>

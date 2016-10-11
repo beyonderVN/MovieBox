@@ -1,20 +1,25 @@
 package com.longngo.moviebox.ui.activity.main;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 
-import android.support.v7.app.ActionBar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.longngo.moviebox.R;
 import com.longngo.moviebox.FootballFanApplication;
+import com.longngo.moviebox.common.recyclerviewhelper.InfiniteScrollListener;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 
@@ -23,17 +28,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainPresentationModel,MainView,MainPresenter> implements MainView{
-    private static final String TAG = "CompetionDetailActivity";
+    private static final String TAG = "MainActivity";
     @BindInt(R.integer.column_num)
     int columnNum;
     @BindView(R.id.list)
     RecyclerView listRV;
-
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
     BaseAdapter baseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupUI();
@@ -41,7 +48,29 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     void setupUI(){
         setupRV();
         setupToolBar();
+        setupSwipeRefreshLayout();
     }
+
+    private void setupSwipeRefreshLayout() {
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimaryDark);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                listRV.setLayoutFrozen(true);
+                swipeRefresh.setRefreshing(true);
+                (new Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeRefresh.setRefreshing(false);
+                        Log.d("Swipe", "Refreshing Number");
+                        presenter.refreshData();
+                    }
+                }, 500);
+
+            }
+        });
+    }
+
     void setupToolBar(){
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -62,6 +91,28 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
         itemAnimator.setAddDuration(3000);
         itemAnimator.setRemoveDuration(3000);
         listRV.setItemAnimator(itemAnimator);
+
+        listRV.addOnScrollListener(new InfiniteScrollListener(staggeredGridLayoutManagerVertical) {
+            @Override
+            public void onLoadMore() {
+                Log.d(TAG, "onLoadMore: ");
+                try {
+                    presenter.loadMore();
+                } catch (Exception e) {
+                    e.getStackTrace();
+                }
+            }
+
+            @Override
+            public boolean isLoading() {
+                return presenter.getPresentationModel().isLoadingMore();
+            }
+
+            @Override
+            public boolean isNoMore() {
+                return presenter.getPresentationModel().isNoMore();
+            }
+        });
     }
     @Override
     protected void onStart() {
@@ -85,8 +136,9 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
 
 
     @Override
-    public void loadMovies() {
+    public void updateView() {
         baseAdapter.notifyDataSetChanged();
+        listRV.setLayoutFrozen(false);
     }
 
 
