@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.longngo.moviebox.ui.adapter.viewholder.BaseViewHolder;
 import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
+import com.longngo.moviebox.ui.viewmodel.MovieDetailVM;
 import com.longngo.moviebox.ui.viewmodel.MovieVM;
 import com.longngo.moviebox.ui.viewmodel.NoMoreItemVM;
 
@@ -19,4 +20,6 @@ public interface VMTypeFactory {
     int getType(LoadingMoreVM loadingMoreVM);
 
     int getType(NoMoreItemVM noMoreItemVM);
+
+    int getType(MovieDetailVM movieDetailVM);
 }

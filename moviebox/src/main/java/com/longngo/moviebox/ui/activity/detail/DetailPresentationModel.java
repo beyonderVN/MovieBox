@@ -24,4 +24,13 @@ public class DetailPresentationModel extends BasePresentationModel<BaseVM> {
     public void add(List<BaseVM> baseVMs){
         visitableList.addAll(baseVMs);
     }
+
+    public boolean isLoadingMore() {
+        return true;
+    }
+
+    public boolean isNoMore() {
+        return true;
+    }
+
 }

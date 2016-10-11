@@ -1,10 +1,8 @@
 package com.longngo.moviebox.ui.activity.main;
 
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,14 +12,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.longngo.moviebox.R;
 import com.longngo.moviebox.FootballFanApplication;
+import com.longngo.moviebox.R;
 import com.longngo.moviebox.common.recyclerviewhelper.InfiniteScrollListener;
-import com.longngo.moviebox.ui.adapter.BaseAdapter;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
+import com.longngo.moviebox.ui.adapter.BaseAdapter;
 
 import butterknife.BindInt;
 import butterknife.BindView;
@@ -31,7 +30,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     private static final String TAG = "MainActivity";
     @BindInt(R.integer.column_num)
     int columnNum;
-    @BindView(R.id.list)
+    @BindView(R.id.rvMovieList)
     RecyclerView listRV;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
@@ -49,6 +48,20 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
         setupRV();
         setupToolBar();
         setupSwipeRefreshLayout();
+        setupStatusBar();
+    }
+
+    private void setupStatusBar() {
+        Window window = getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(getResources().getColor(R.color.statusbar));
     }
 
     private void setupSwipeRefreshLayout() {
@@ -61,7 +74,6 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
                 (new Handler()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        swipeRefresh.setRefreshing(false);
                         Log.d("Swipe", "Refreshing Number");
                         presenter.refreshData();
                     }
@@ -139,6 +151,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     public void updateView() {
         baseAdapter.notifyDataSetChanged();
         listRV.setLayoutFrozen(false);
+        swipeRefresh.setRefreshing(false);
     }
 
 

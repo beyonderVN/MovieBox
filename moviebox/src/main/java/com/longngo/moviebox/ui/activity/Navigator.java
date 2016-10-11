@@ -4,7 +4,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 
-import com.longngo.moviebox.ui.activity.detail.DetailActivity;
+import com.longngo.moviebox.ui.activity.detail.DetailUsingOnlyRVActivity;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
 
 
@@ -15,7 +15,8 @@ import com.longngo.moviebox.ui.viewmodel.BaseVM;
 public class Navigator {
     public static void navigateToDetailActivity(Context context, BaseVM baseVM,ActivityOptions ops) {
         if (context != null) {
-            Intent intentToLaunch = DetailActivity.getCallingIntent(context, baseVM);
+//            Intent intentToLaunch = DetailActivity.getCallingIntent(context, baseVM);
+            Intent intentToLaunch = DetailUsingOnlyRVActivity.getCallingIntent(context, baseVM);
             context.startActivity(intentToLaunch,ops.toBundle());
         }
     }

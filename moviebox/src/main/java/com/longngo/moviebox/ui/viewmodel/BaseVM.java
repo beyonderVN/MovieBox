@@ -9,4 +9,13 @@ import java.io.Serializable;
  */
 
 public abstract class BaseVM implements Serializable,Visitable {
+    private boolean fullSpan = false;
+
+    public boolean isFullSpan() {
+        return fullSpan;
+    }
+
+    public void setFullSpan(boolean fullSpan) {
+        this.fullSpan = fullSpan;
+    }
 }

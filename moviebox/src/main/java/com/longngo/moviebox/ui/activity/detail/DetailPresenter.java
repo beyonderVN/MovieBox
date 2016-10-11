@@ -97,4 +97,11 @@ public class DetailPresenter extends SimpleMVPPresenter<DetailView,DetailPresent
         if(getMvpView()==null)return;
         getMvpView().loadCompetitions();
     }
+
+    public void refreshData() {
+    }
+
+    public void loadMore() {
+
+    }
 }

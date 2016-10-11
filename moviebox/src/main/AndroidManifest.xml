@@ -18,6 +18,10 @@
             android:theme="@style/AppTheme.Translucent">
 
         </activity>
+        <activity android:name="com.longngo.moviebox.ui.activity.detail.DetailUsingOnlyRVActivity"
+            android:theme="@style/AppTheme.Translucent">
+
+        </activity>
         <activity-alias
             android:name="laucher"
             android:targetActivity="com.longngo.moviebox.ui.activity.main.MainActivity">
