@@ -1,38 +1,55 @@
 package com.longngo.moviebox.ui.activity.detail;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
+import com.longngo.moviebox.ui.viewmodel.BaseVM;
+import com.longngo.moviebox.ui.viewmodel.MovieVM;
 
-import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailView,DetailPresenter> implements DetailView {
     private static final String TAG = "CompetionDetailActivity";
-    @BindInt(R.integer.column_num)
-    int columnNum;
+    public static final String MOVIE_ITEM = "MOVIE_ITEM";
+    @BindView(R.id.ivHeader)
+    ImageView imageView;
     @BindView(R.id.list)
     RecyclerView listRV;
 
     BaseAdapter baseAdapter;
 
+    public static Intent getCallingIntent(Context context, BaseVM baseVM){
+        Intent intent = new Intent(context, DetailActivity.class);
+        intent.putExtra(MOVIE_ITEM,baseVM);
+        return intent;
+    }
+    private MovieVM getItemFromIntent(Intent intent){
+        return (MovieVM) getIntent().getSerializableExtra(MOVIE_ITEM);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         setupUI();
+        MovieVM movieVM = getItemFromIntent(getIntent());
+        Glide.with(this)
+                .load("https://image.tmdb.org/t/p/w185_and_h278_bestv2"+movieVM.getMovie().getBackdropPath())
+                .asBitmap().into(imageView);
+
     }
     void setupUI(){
         setupRV();
@@ -42,22 +59,10 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("JavBox");
     }
     void setupRV(){
-        final StaggeredGridLayoutManager staggeredGridLayoutManagerVertical =
-                new StaggeredGridLayoutManager(
-                        columnNum, //The number of Columns in the grid
-                        LinearLayoutManager.VERTICAL);
-        staggeredGridLayoutManagerVertical.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
-        staggeredGridLayoutManagerVertical.invalidateSpanAssignments();
-        RecyclerView.LayoutManager layoutGridManager = new GridLayoutManager(this, columnNum);
-        listRV.setLayoutManager(staggeredGridLayoutManagerVertical);
-        listRV.setHasFixedSize(true);
-        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-        itemAnimator.setAddDuration(3000);
-        itemAnimator.setRemoveDuration(3000);
-        listRV.setItemAnimator(itemAnimator);
+        listRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
     }
     @Override
     protected void onStart() {

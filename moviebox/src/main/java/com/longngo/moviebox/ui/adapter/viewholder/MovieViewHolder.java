@@ -1,5 +1,7 @@
 package com.longngo.moviebox.ui.adapter.viewholder;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
@@ -13,13 +15,15 @@ import com.longngo.moviebox.ui.viewmodel.MovieVM;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.longngo.moviebox.R.id.wrap;
+
 /**
  * Created by Long on 10/5/2016.
  *
  */
 
 public class MovieViewHolder extends BaseViewHolder<MovieVM> {
-    @BindView(R.id.wrap)
+    @BindView(wrap)
     CardView cardView;
     @BindView(R.id.ivBackground)
     DynamicHeightImageView imageView;
@@ -35,10 +39,14 @@ public class MovieViewHolder extends BaseViewHolder<MovieVM> {
     public  void bind(MovieVM item) {
         movieVM = item;
         des.setText(movieVM.getMovie().getTitle());
-        des.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigator.navigateToCompetionDetailActivity(v.getContext(), movieVM.getMovie());
+                View sharedView = imageView;
+                ActivityOptions ops = ActivityOptions.makeSceneTransitionAnimation((Activity) itemView.getContext(),
+                        sharedView,
+                        itemView.getContext().getString(R.string.transition_name_detail_activity_itemview));
+                Navigator.navigateToDetailActivity(v.getContext(), movieVM,ops);
             }
         });
 //        imageView.setRatio(1.5);

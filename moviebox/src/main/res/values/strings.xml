@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Football Fan</string>
+    <string name="transition_name_detail_activity_itemview">itemView</string>
 </resources>

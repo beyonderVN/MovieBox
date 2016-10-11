@@ -1,8 +1,11 @@
 package com.longngo.moviebox.ui.activity;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
 
-import com.longngo.moviebox.data.model.Movie;
+import com.longngo.moviebox.ui.activity.detail.DetailActivity;
+import com.longngo.moviebox.ui.viewmodel.BaseVM;
 
 
 /**
@@ -10,10 +13,10 @@ import com.longngo.moviebox.data.model.Movie;
  */
 
 public class Navigator {
-    public static void navigateToCompetionDetailActivity(Context context, Movie competition) {
+    public static void navigateToDetailActivity(Context context, BaseVM baseVM,ActivityOptions ops) {
         if (context != null) {
-//            Intent intentToLaunch = CompetionDetailActivity.createIntent(context, competition);
-//            context.startActivity(intentToLaunch);
+            Intent intentToLaunch = DetailActivity.getCallingIntent(context, baseVM);
+            context.startActivity(intentToLaunch,ops.toBundle());
         }
     }
 }
