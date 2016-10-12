@@ -1,9 +1,8 @@
 package com.longngo.moviebox.ui.activity.main;
 
-import android.util.Log;
-
 import com.longngo.moviebox.ui.activity.base.BasePresentationModel;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
+import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
 
 import java.util.List;
 
@@ -32,10 +31,6 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
         return loadingMore;
     }
 
-    public void setLoadingMore(boolean loadingMore) {
-//        Log.d(TAG, "setLoadingMore: "+loadingMore);
-        this.loadingMore = loadingMore;
-    }
 
     public void setNoMore(boolean noMore) {
         this.noMore = noMore;
@@ -63,8 +58,14 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
-
+    public void startLoadingMore() {
+        if (loadingMore) return;
+        loadingMore = true;
+        add(new LoadingMoreVM());
+    }
     public void stopLoadingMore() {
+        if (!loadingMore) return;
         getVisitableList().remove(getVisitableList().size() - 1);
+        loadingMore = false;
     }
 }

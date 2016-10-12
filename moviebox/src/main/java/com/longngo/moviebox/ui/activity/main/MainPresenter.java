@@ -7,7 +7,6 @@ import com.longngo.moviebox.common.schedulers.BaseSchedulerProvider;
 import com.longngo.moviebox.data.model.Movie;
 import com.longngo.moviebox.data.source.MoviesRepository;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
-import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
 import com.longngo.moviebox.ui.viewmodel.mapper.Mapper;
 
 import java.util.List;
@@ -119,10 +118,9 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                         Log.d(TAG, "onNext: "+competitions.size());
                         if (!competitions.isEmpty()) {
                             Log.d(TAG, "onSuccess: "+competitions.size());
-                            getPresentationModel().stopLoadingMore();
+                            stopLoadingMore();
                             getPresentationModel().add(competitions);
                             getPresentationModel().setCurrentPage(getPresentationModel().getCurrentPage()+1);
-                            getPresentationModel().setLoadingMore(false);
                             updateView();
                         } else {
                             Log.d(TAG, "onSuccess: is empty");
@@ -138,14 +136,24 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
     }
 
     public void loadMore() {
-        getPresentationModel().setLoadingMore(true);
-        getPresentationModel().add(new LoadingMoreVM());
-        updateView();
+        startLoadingMore();
         fetchMore();
     }
 
+    private void startLoadingMore() {
+        getPresentationModel().startLoadingMore();
+        updateView();
+    }
+    private void stopLoadingMore() {
+        getPresentationModel().stopLoadingMore();
+        updateView();
+    }
     public void refreshData() {
         getPresentationModel().reset();
         fetchRepositoryFirst();
+    }
+
+    public void fixState() {
+        getPresentationModel().stopLoadingMore();
     }
 }

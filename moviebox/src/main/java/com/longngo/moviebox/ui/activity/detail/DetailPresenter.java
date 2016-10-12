@@ -37,7 +37,7 @@ public class DetailPresenter extends SimpleMVPPresenter<DetailView,DetailPresent
     @Override
     public void attachView(DetailView mvpView, DetailPresentationModel presentationModel) {
         super.attachView(mvpView, presentationModel);
-        fetchRepositories("2016");
+//        fetchRepositories("2016");
     }
 
     @Override
