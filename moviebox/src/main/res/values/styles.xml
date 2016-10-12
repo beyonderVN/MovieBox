@@ -35,7 +35,7 @@
 
     </style>
 
-    <style name="splashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/ic_android_white_24dp</item>
+    <style name="splashScreenTheme" parent="AppTheme.Translucent">
+        <item name="android:windowBackground">@drawable/welcome_screen</item>
     </style>
 </resources>

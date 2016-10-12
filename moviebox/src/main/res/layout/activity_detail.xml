@@ -49,7 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    >
                     <TextView
                         android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
@@ -67,6 +68,23 @@
                         android:textSize="10sp"
                         />
                     <TextView
+                        android:id="@+id/tvPopularity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Popularity: "
+                        android:textSize="10sp"
+                        />
+                    <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                        android:id="@+id/srbStar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srb_starSize="16dp"
+                        app:srb_numberOfStars="6"
+                        app:srb_stepSize="0.1"
+                        app:srb_borderColor="@color/yellow"
+                        app:srb_fillColor="@color/yellow"
+                        />
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Overview: "
@@ -82,6 +100,9 @@
                         android:textSize="12sp"
 
                         />
+                    <android.support.v4.widget.Space
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp" />
                 </LinearLayout>
 
             </LinearLayout>

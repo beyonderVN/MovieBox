@@ -8,5 +8,7 @@ import com.longngo.moviebox.common.coremvp.MVPView;
  */
 
 public interface MainView extends MVPView {
+    void showProcess();
+    void showContent();
     void updateView();
 }

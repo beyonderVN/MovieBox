@@ -31,7 +31,10 @@ public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseVM>> {
         this.list = basePresentationModel.getVisitableList();
         this.activity = activity;
     }
-
+    public BaseAdapter(Activity activity,List<BaseVM> baseVMs) {
+        this.list = baseVMs;
+        this.activity = activity;
+    }
     @Override
     public BaseViewHolder<BaseVM> onCreateViewHolder(ViewGroup parent, int viewType) {
         if (parent != null) {

@@ -1,27 +1,34 @@
 package com.longngo.moviebox.ui.activity.detail;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.util.Log;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
 import com.longngo.moviebox.common.DynamicHeightImageView;
 import com.longngo.moviebox.common.ElasticDragDismissFrameLayout;
+import com.longngo.moviebox.common.recyclerviewhelper.PlaceHolderDrawableHelper;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
 import com.longngo.moviebox.ui.viewmodel.MovieVM;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailView,DetailPresenter> implements DetailView {
-    private static final String TAG = "CompetionDetailActivity";
+    private static final String TAG = "DetailActivity";
     public static final String MOVIE_ITEM = "MOVIE_ITEM";
 
     @BindView(R.id.activity_detail)
@@ -35,8 +42,10 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
     TextView tvTitle;
     @BindView(R.id.tvReleaseDate)
     TextView tvReleaseDate;
-
-
+    @BindView(R.id.tvPopularity)
+    TextView tvPopularity;
+    @BindView(R.id.srbStar)
+    SimpleRatingBar srbStart;
     public static Intent getCallingIntent(Context context, BaseVM baseVM){
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(MOVIE_ITEM,baseVM);
@@ -60,13 +69,27 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
         Log.d(TAG, "setupUI: "+"https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getBackdropPath());
         Log.d(TAG, "setupUI: "+"https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath());
         imageView.setRatio(1.5);
-        Glide.with(this)
-                .load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
-                .asBitmap()
+//        Glide.with(this)
+//                .load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
+//                .into(imageView);
+        Picasso.with(this).load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
+                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
                 .into(imageView);
         tvOverview.setText(movieVM.getMovie().getOverview());
         tvTitle.setText(movieVM.getMovie().getTitle());
         tvReleaseDate.setText(Html.fromHtml("<b>Release Date: </b><small>"+movieVM.getMovie().getReleaseDate()+"<small>"));
+        tvPopularity.setText(Html.fromHtml("<b>Popularity: </b><small>"+movieVM.getMovie().getPopularity()+"<small>"));
+        Log.d(TAG, "movieVM.getMovie().getVoteAverage() "+movieVM.getMovie().getVoteAverage());
+
+        SimpleRatingBar.AnimationBuilder builder = srbStart.getAnimationBuilder()
+                .setRepeatCount(0)
+                .setRepeatMode(ValueAnimator.INFINITE)
+                .setInterpolator(new BounceInterpolator())
+
+                .setRatingTarget(movieVM.getMovie().getVoteAverage())
+
+                ;
+        builder.start();
 
 
 

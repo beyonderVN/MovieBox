@@ -18,16 +18,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvMovieList"
+        <ViewAnimator
+            android:id="@+id/viewAnimator"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingTop="53dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp">
+            android:layout_height="match_parent"
+            android:inAnimation="@android:anim/fade_in"
+            android:outAnimation="@android:anim/fade_out">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvMovieList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="53dp">
+
+            </android.support.v7.widget.RecyclerView>
+            <include layout="@layout/infinite_loading"
+
+                />
+        </ViewAnimator>
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <LinearLayout

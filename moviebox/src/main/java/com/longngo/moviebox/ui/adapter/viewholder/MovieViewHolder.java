@@ -12,6 +12,7 @@ import com.longngo.moviebox.common.DynamicHeightImageView;
 import com.longngo.moviebox.common.recyclerviewhelper.PlaceHolderDrawableHelper;
 import com.longngo.moviebox.ui.activity.Navigator;
 import com.longngo.moviebox.ui.viewmodel.MovieVM;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,9 +53,11 @@ public class MovieViewHolder extends BaseViewHolder<MovieVM> {
             }
         });
         imageView.setRatio(1.5);
-        Glide.with(itemView.getContext())
-                .load("https://image.tmdb.org/t/p/w342"+item.getMovie().getPosterPath())
-                .asBitmap()
+//        Glide.with(itemView.getContext())
+//                .load("https://image.tmdb.org/t/p/w342"+item.getMovie().getPosterPath())
+//                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
+//                .into(imageView);
+        Picasso.with(itemView.getContext()).load("https://image.tmdb.org/t/p/w342"+item.getMovie().getPosterPath())
                 .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
                 .into(imageView);
 

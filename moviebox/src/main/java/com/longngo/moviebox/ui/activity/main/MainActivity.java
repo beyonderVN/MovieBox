@@ -15,12 +15,19 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+import android.widget.ViewAnimator;
 
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
 import com.longngo.moviebox.common.recyclerviewhelper.InfiniteScrollListener;
+import com.longngo.moviebox.data.model.Movie;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
+import com.longngo.moviebox.ui.viewmodel.BaseVM;
+import com.longngo.moviebox.ui.viewmodel.MovieDetailVM;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindInt;
 import butterknife.BindView;
@@ -28,12 +35,18 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity<MainPresentationModel,MainView,MainPresenter> implements MainView{
     private static final String TAG = "MainActivity";
+    private static final int POSITION_CONTENT_VIEW = 0;
+    private static final int POSITION_PROGRESS_VIEW = 1;
     @BindInt(R.integer.column_num)
     int columnNum;
     @BindView(R.id.rvMovieList)
     RecyclerView listRV;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
+
+    @BindView(R.id.viewAnimator)
+    ViewAnimator resultAnimator;
+
     BaseAdapter baseAdapter;
 
     @Override
@@ -125,6 +138,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
                 return presenter.getPresentationModel().isNoMore();
             }
         });
+
     }
     @Override
     protected void onStart() {
@@ -147,6 +161,17 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
         return new MainPresentationModel();
     }
 
+
+    @Override
+    public void showProcess() {
+        resultAnimator.setDisplayedChild(POSITION_PROGRESS_VIEW);
+        swipeRefresh.setRefreshing(false);
+    }
+
+    @Override
+    public void showContent() {
+        resultAnimator.setDisplayedChild(POSITION_CONTENT_VIEW);
+    }
 
     @Override
     public void updateView() {

@@ -50,6 +50,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
         if (!getPresentationModel().isShouldFetchRepositories()) {
             return;
         }
+        showProcess();
         mSubscriptions.clear();
         Subscription subscription = competitionsRepository
                 .getMovieList(getPresentationModel().getNextPage())
@@ -84,6 +85,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                         } else {
                             Log.d(TAG, "onSuccess: is empty");
                         }
+                        showContent();
                     }
                 });
         mSubscriptions.add(subscription);
@@ -129,6 +131,19 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                 });
         mSubscriptions.add(subscription);
     }
+
+    @Override
+    public void showProcess() {
+        if(getMvpView()==null)return;
+        getMvpView().showProcess();
+    }
+
+    @Override
+    public void showContent() {
+        if(getMvpView()==null)return;
+        getMvpView().showContent();
+    }
+
     @Override
     public void updateView() {
         if(getMvpView()==null)return;

@@ -31,6 +31,7 @@ import rx.functions.Func1;
  * obtained from the server, by using the remote data source only if the local database doesn't
  * exist or is empty.
  */
+// TODO: 12/10/2016 add flow to cache data to memmory and sqlite
 @Singleton
 public class MoviesRepository implements MoviesDataSource {
     private static final String TAG = "MoviesRepository";
