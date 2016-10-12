@@ -6,12 +6,14 @@ import com.longngo.moviebox.R;
 import com.longngo.moviebox.ui.adapter.viewholder.BaseViewHolder;
 import com.longngo.moviebox.ui.adapter.viewholder.LoadingMoreHolder;
 import com.longngo.moviebox.ui.adapter.viewholder.MovieDetailHolder;
+import com.longngo.moviebox.ui.adapter.viewholder.MovieTrailerItemHolder;
 import com.longngo.moviebox.ui.adapter.viewholder.MovieViewHolder;
 import com.longngo.moviebox.ui.adapter.viewholder.NoMoreItemHolder;
 import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
 import com.longngo.moviebox.ui.viewmodel.MovieDetailVM;
 import com.longngo.moviebox.ui.viewmodel.MovieVM;
 import com.longngo.moviebox.ui.viewmodel.NoMoreItemVM;
+import com.longngo.moviebox.ui.viewmodel.TrailerMovieVM;
 
 /**
  * Created by Long on 10/5/2016.
@@ -22,6 +24,7 @@ public class TypeFactoryForListVM implements VMTypeFactory {
     private static final int LOADING_MORE = R.layout.infinite_loading;
     private static final int NO_MORE = R.layout.infinite_no_more;
     private static final int MOVIE_DETAIL = R.layout.layout_movie_detail;
+    private static final int MOVIE_TRAILER_ITEM = R.layout.layout_movie_trailer_item;
     @Override
     public int getType(MovieVM movieVM) {
         return ITEM_MOVIE;
@@ -40,6 +43,8 @@ public class TypeFactoryForListVM implements VMTypeFactory {
                 return new NoMoreItemHolder(view);
             case MOVIE_DETAIL:
                 return new MovieDetailHolder(view);
+            case MOVIE_TRAILER_ITEM:
+                return new MovieTrailerItemHolder(view);
         }
         return null;
     }
@@ -57,5 +62,10 @@ public class TypeFactoryForListVM implements VMTypeFactory {
     @Override
     public int getType(MovieDetailVM movieDetailVM) {
         return MOVIE_DETAIL;
+    }
+
+    @Override
+    public int getType(TrailerMovieVM trailerMovieVM) {
+        return MOVIE_TRAILER_ITEM;
     }
 }

@@ -59,7 +59,7 @@ public class DetailPresenter extends SimpleMVPPresenter<DetailView,DetailPresent
                 .map(new Func1<List<Movie>, List<BaseVM>>() {
                     @Override
                     public List<BaseVM> call(List<Movie> competitions) {
-                        return Mapper.tranCompetition(competitions);
+                        return Mapper.tranToVM(competitions);
                     }
                 })
                 .subscribeOn( baseSchedulerProvider.computation())

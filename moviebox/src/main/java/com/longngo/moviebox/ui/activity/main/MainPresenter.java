@@ -11,7 +11,6 @@ import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
 import com.longngo.moviebox.ui.viewmodel.mapper.Mapper;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
@@ -58,7 +57,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                 .map(new Func1<List<Movie>, List<BaseVM>>() {
                     @Override
                     public List<BaseVM> call(List<Movie> competitions) {
-                        return Mapper.tranCompetition(competitions);
+                        return Mapper.tranToVM(competitions);
                     }
                 })
                 .subscribeOn( baseSchedulerProvider.computation())
@@ -98,7 +97,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                 .map(new Func1<List<Movie>, List<BaseVM>>() {
                     @Override
                     public List<BaseVM> call(List<Movie> competitions) {
-                        return Mapper.tranCompetition(competitions);
+                        return Mapper.tranToVM(competitions);
                     }
                 })
                 .subscribeOn( baseSchedulerProvider.computation())

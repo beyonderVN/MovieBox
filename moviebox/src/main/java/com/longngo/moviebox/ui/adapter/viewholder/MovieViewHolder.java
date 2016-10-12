@@ -3,7 +3,6 @@ package com.longngo.moviebox.ui.adapter.viewholder;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -59,17 +58,6 @@ public class MovieViewHolder extends BaseViewHolder<MovieVM> {
                 .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
                 .into(imageView);
 
-        if(item.getMovie().getVoteAverage()>5){
-//            Log.d(TAG, "bind: " +item.getMovie().getVoteAverage());
-            StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
-            layoutParams.setFullSpan(true);
-        }else {
-            StaggeredGridLayoutManager.LayoutParams layoutParams = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
-            layoutParams.setFullSpan(false);
-        }
-//        ImageView imageView = (ImageView) itemView.findViewById(R.id.anima);
-//        imageView.setBackgroundResource(R.drawable.anim_android);
-//        AnimationDrawable progressAnimation = (AnimationDrawable) imageView.getBackground();
-//        progressAnimation.start();
+
     }
 }

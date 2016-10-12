@@ -23,7 +23,8 @@
             android:clipToPadding="false"
             android:paddingTop="53dp"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp">
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp">
 
         </android.support.v7.widget.RecyclerView>
 
