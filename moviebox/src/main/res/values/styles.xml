@@ -36,6 +36,6 @@
     </style>
 
     <style name="splashScreenTheme" parent="AppTheme.Translucent">
-        <item name="android:windowBackground">@drawable/welcome_screen</item>
+        <item name="android:windowBackground">@drawable/ic_android_white_24dp</item>
     </style>
 </resources>

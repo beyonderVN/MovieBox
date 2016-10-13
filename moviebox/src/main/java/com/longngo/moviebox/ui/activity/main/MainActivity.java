@@ -20,14 +20,8 @@ import android.widget.ViewAnimator;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
 import com.longngo.moviebox.common.recyclerviewhelper.InfiniteScrollListener;
-import com.longngo.moviebox.data.model.Movie;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
-import com.longngo.moviebox.ui.viewmodel.BaseVM;
-import com.longngo.moviebox.ui.viewmodel.MovieDetailVM;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindInt;
 import butterknife.BindView;
@@ -52,7 +46,6 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.AppTheme_NoActionBar);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupUI();
