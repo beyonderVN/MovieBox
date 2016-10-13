@@ -18,7 +18,7 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
     public MainPresentationModel() {
         super();
     }
-    private int column = 2;
+    private int column = 1;
 
     @Override
     public boolean isShouldFetchRepositories() {
@@ -28,10 +28,9 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
         visitableList.add(baseVM);
     }
     int countNonFullSpanItem = 0;
-    int nonFullSpanItemPosition = 0;
     public void addAndCollapse(BaseVM baseVM){
 
-        if (countNonFullSpanItem%2==0){
+        if (countNonFullSpanItem%column==0){
             Log.d(TAG, "countNonFullSpanItem%2 "+countNonFullSpanItem);
             visitableList.add(baseVM);
             if(!baseVM.isFullSpan()){
@@ -111,9 +110,11 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
 
     public void fixLayout(int column) {
         this.column = column;
+        Log.d(TAG, "column: "+column);
         List<BaseVM> tempBaseVMs= new ArrayList<>();
         tempBaseVMs.addAll(visitableList);
         visitableList.clear();
+        countNonFullSpanItem=0;
         addAndCollapse(tempBaseVMs);
     }
 }
