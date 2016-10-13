@@ -6,7 +6,6 @@ import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.longngo.moviebox.R;
 import com.longngo.moviebox.common.DynamicHeightImageView;
 import com.longngo.moviebox.common.recyclerviewhelper.PlaceHolderDrawableHelper;
@@ -58,7 +57,7 @@ public class MovieViewHolder extends BaseViewHolder<MovieVM> {
 //                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
 //                .into(imageView);
         Picasso.with(itemView.getContext()).load("https://image.tmdb.org/t/p/w342"+item.getMovie().getPosterPath())
-                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
+                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(item.getMovie().getId()))
                 .into(imageView);
 
 

@@ -79,7 +79,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                         if (!competitions.isEmpty()) {
                             Log.d(TAG, "onSuccess: "+competitions.size());
 
-                            getPresentationModel().add(competitions);
+                            getPresentationModel().addAndCollapse(competitions);
                             updateView();
                             getPresentationModel().setCurrentPage(getPresentationModel().getCurrentPage()+1);
                         } else {
@@ -121,7 +121,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                         if (!competitions.isEmpty()) {
                             Log.d(TAG, "onSuccess: "+competitions.size());
                             stopLoadingMore();
-                            getPresentationModel().add(competitions);
+                            getPresentationModel().addAndCollapse(competitions);
                             getPresentationModel().setCurrentPage(getPresentationModel().getCurrentPage()+1);
                             updateView();
                         } else {

@@ -7,12 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.util.Log;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.BounceInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
@@ -73,12 +70,12 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
 //                .load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
 //                .into(imageView);
         Picasso.with(this).load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
-                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable())
+                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(movieVM.getMovie().getId()))
                 .into(imageView);
         tvOverview.setText(movieVM.getMovie().getOverview());
         tvTitle.setText(movieVM.getMovie().getTitle());
-        tvReleaseDate.setText(Html.fromHtml("<b>Release Date: </b><small>"+movieVM.getMovie().getReleaseDate()+"<small>"));
-        tvPopularity.setText(Html.fromHtml("<b>Popularity: </b><small>"+movieVM.getMovie().getPopularity()+"<small>"));
+        tvReleaseDate.setText(Html.fromHtml("<b>Release Date: </b>"+movieVM.getMovie().getReleaseDate()+""));
+        tvPopularity.setText(Html.fromHtml("<b>Popularity: </b>"+movieVM.getMovie().getPopularity()+""));
         Log.d(TAG, "movieVM.getMovie().getVoteAverage() "+movieVM.getMovie().getVoteAverage());
 
         SimpleRatingBar.AnimationBuilder builder = srbStart.getAnimationBuilder()

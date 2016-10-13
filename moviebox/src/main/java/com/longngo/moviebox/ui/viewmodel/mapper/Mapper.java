@@ -24,20 +24,16 @@ public class Mapper {
 
     public static List<BaseVM> tranToVM(List<Movie> movieList){
         List<BaseVM> list = new ArrayList<>();
-        int nextFullspanPosition = 0;
-        int count = 0;
+
         for (Movie item :movieList) {
 //            list.add(item.getVoteAverage()>5?tranToMovieTrailerVM(item):tranToMovieVM(item));
-            if(count==4){
-                count = 0;
-                nextFullspanPosition=list.size();
-            }
+
             if (item.getVoteAverage()>5){
-                list.add(nextFullspanPosition,tranToMovieTrailerVM(item));
+                list.add(tranToMovieTrailerVM(item));
 
             }else {
                 list.add(tranToMovieVM(item));
-                count++;
+
             }
         }
         return list;

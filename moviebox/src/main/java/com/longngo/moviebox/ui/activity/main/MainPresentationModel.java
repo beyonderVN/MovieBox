@@ -1,5 +1,7 @@
 package com.longngo.moviebox.ui.activity.main;
 
+import android.util.Log;
+
 import com.longngo.moviebox.ui.activity.base.BasePresentationModel;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
 import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
@@ -22,6 +24,41 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
     }
     public void add(BaseVM baseVM){
         visitableList.add(baseVM);
+    }
+    int countNonFullSpanItem = 0;
+    int nonFullSpanItemPosition = 0;
+    public void addAndCollapse(BaseVM baseVM){
+
+        if (countNonFullSpanItem%2==0){
+            Log.d(TAG, "countNonFullSpanItem%2 "+countNonFullSpanItem);
+            visitableList.add(baseVM);
+            if(!baseVM.isFullSpan()){
+                countNonFullSpanItem++;
+                Log.d(TAG, "countNonFullSpanItem: "+countNonFullSpanItem);
+            }
+        }else{
+            if(baseVM.isFullSpan()){
+                visitableList.add(baseVM);
+            }else {
+                for (int i = visitableList.size()-1; i >=0; i--) {
+                    Log.d(TAG, "i: "+i);
+                    Log.d(TAG, "i: "+visitableList.get(i).isFullSpan());
+                    if(!visitableList.get(i).isFullSpan()){
+                        visitableList.add(i+1,baseVM);
+                        countNonFullSpanItem++;
+                        Log.d(TAG, "countNonFullSpanItem: "+countNonFullSpanItem);
+                        break;
+                    }
+                }
+
+            }
+        }
+    }
+    public void addAndCollapse(List<BaseVM> baseVMs){
+        for (BaseVM baseVM: baseVMs
+             ) {
+            addAndCollapse(baseVM);
+        }
     }
     public void add(List<BaseVM> baseVMs){
         visitableList.addAll(baseVMs);
@@ -46,6 +83,7 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
         currentPage = 0;
         noMore =false;
         loadingMore =false;
+        countNonFullSpanItem=0;
     }
     int currentPage = 0;
 

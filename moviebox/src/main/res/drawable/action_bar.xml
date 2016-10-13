@@ -7,9 +7,11 @@
             </item>
             <item>
                 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-                    <gradient android:angle="-90" android:centerColor="#3b666666" android:dither="true"
+                    <gradient android:angle="-90"
+                        android:centerColor="#5c797979" android:dither="true"
 
-                        android:endColor="#00006e19" android:startColor="#ab565656"
+                        android:endColor="#18818181"
+                        android:startColor="@color/scrim"
 
                         />
                 </shape>

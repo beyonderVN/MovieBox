@@ -61,7 +61,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Title"
-                            android:textSize="16sp"
+                            android:textSize="20sp"
                             android:textColor="@color/black"
 
                             />
@@ -83,7 +83,7 @@
                             android:id="@+id/srbStar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:srb_starSize="16dp"
+                            app:srb_starSize="12dp"
                             app:srb_numberOfStars="6"
                             app:srb_stepSize="0.1"
                             app:srb_borderColor="@color/yellow"
