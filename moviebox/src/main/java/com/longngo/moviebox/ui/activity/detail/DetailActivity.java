@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.Html;
 import android.util.Log;
 import android.view.animation.BounceInterpolator;
@@ -27,22 +28,32 @@ import butterknife.ButterKnife;
 public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailView,DetailPresenter> implements DetailView {
     private static final String TAG = "DetailActivity";
     public static final String MOVIE_ITEM = "MOVIE_ITEM";
-
+    @Nullable
     @BindView(R.id.activity_detail)
     ElasticDragDismissFrameLayout draggableFrame;
     private ElasticDragDismissFrameLayout.SystemChromeFader chromeFader;
+    @Nullable
     @BindView(R.id.ivHeader)
     DynamicHeightImageView imageView;
+    @Nullable
+    @BindView(R.id.ivBackdropPath)
+    DynamicHeightImageView ivBackdropPath;
+    @Nullable
     @BindView(R.id.tvOverview)
     TextView tvOverview;
+    @Nullable
     @BindView(R.id.tvTitle)
     TextView tvTitle;
+    @Nullable
     @BindView(R.id.tvReleaseDate)
     TextView tvReleaseDate;
+    @Nullable
     @BindView(R.id.tvPopularity)
     TextView tvPopularity;
+    @Nullable
     @BindView(R.id.srbStar)
     SimpleRatingBar srbStart;
+
     public static Intent getCallingIntent(Context context, BaseVM baseVM){
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(MOVIE_ITEM,baseVM);
@@ -69,9 +80,20 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
 //        Glide.with(this)
 //                .load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
 //                .into(imageView);
-        Picasso.with(this).load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
-                .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(movieVM.getMovie().getId()))
-                .into(imageView);
+        if (imageView!=null) {
+            Picasso.with(this).load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
+                    .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(movieVM.getMovie().getId()))
+                    .into(imageView);
+        }
+
+        if (ivBackdropPath != null) {
+            Picasso.with(this).load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getBackdropPath())
+                    .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(movieVM.getMovie().getId()))
+                    .into(ivBackdropPath);
+        }
+
+
+
         tvOverview.setText(movieVM.getMovie().getOverview());
         tvTitle.setText(movieVM.getMovie().getTitle());
         tvReleaseDate.setText(Html.fromHtml("<b>Release Date: </b>"+movieVM.getMovie().getReleaseDate()+""));

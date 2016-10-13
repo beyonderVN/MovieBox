@@ -168,7 +168,8 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
         fetchRepositoryFirst();
     }
 
-    public void fixState() {
+    public void fixState(int column) {
         getPresentationModel().stopLoadingMore();
+        getPresentationModel().fixLayout(column);
     }
 }

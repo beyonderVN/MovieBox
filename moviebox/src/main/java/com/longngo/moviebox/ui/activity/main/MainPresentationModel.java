@@ -6,6 +6,7 @@ import com.longngo.moviebox.ui.activity.base.BasePresentationModel;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
 import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
     public MainPresentationModel() {
         super();
     }
+    private int column = 2;
 
     @Override
     public boolean isShouldFetchRepositories() {
@@ -105,5 +107,13 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
         if (!loadingMore) return;
         getVisitableList().remove(getVisitableList().size() - 1);
         loadingMore = false;
+    }
+
+    public void fixLayout(int column) {
+        this.column = column;
+        List<BaseVM> tempBaseVMs= new ArrayList<>();
+        tempBaseVMs.addAll(visitableList);
+        visitableList.clear();
+        addAndCollapse(tempBaseVMs);
     }
 }

@@ -136,7 +136,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.fixState();
+        presenter.fixState(columnNum);
         if(baseAdapter == null){
             baseAdapter = new BaseAdapter(this, presenter.getPresentationModel());
             listRV.setAdapter(baseAdapter);
