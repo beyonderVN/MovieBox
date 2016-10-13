@@ -5,10 +5,12 @@ import android.util.Log;
 
 import com.fernandocejas.frodo.annotation.RxLogObservable;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.longngo.moviebox.data.model.Movie;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import rx.Observable;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 @Singleton
@@ -58,6 +61,25 @@ public class MovieBoxService {
                         return movies;
                     }
                 });
+    }
+
+    public String getTrailer(int id){
+        String result="";
+        try {
+            JsonObject jsonObject =  movieBoxServiceApi.getTrailer(id).execute().body();
+
+            JsonArray json = jsonObject.getAsJsonArray("youtube");
+
+            if (json.size() > 0) {
+                result =  json.get(0).toString();// parse the date instead of toString()
+                Log.d(TAG, "result: "+result);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
 
