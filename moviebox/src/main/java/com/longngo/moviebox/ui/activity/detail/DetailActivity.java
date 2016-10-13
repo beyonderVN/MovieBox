@@ -1,7 +1,6 @@
 package com.longngo.moviebox.ui.activity.detail;
 
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +13,6 @@ import android.view.animation.BounceInterpolator;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
@@ -29,6 +27,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailView,DetailPresenter> implements DetailView {
     private static final String TAG = "DetailActivity";
@@ -92,6 +91,7 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
         if (ivBackdropPath != null) {
             Picasso.with(this).load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getBackdropPath())
                     .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(movieVM.getMovie().getId()))
+                    .transform(new RoundedCornersTransformation(5, 0))
                     .into(ivBackdropPath);
         }
 

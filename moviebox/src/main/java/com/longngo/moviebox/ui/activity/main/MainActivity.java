@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Jav Box");
+        getSupportActionBar().setTitle("ChiAyVi Movie Box");
     }
     void setupRV(){
         final StaggeredGridLayoutManager staggeredGridLayoutManagerVertical =

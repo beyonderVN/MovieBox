@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -15,15 +16,16 @@ import com.longngo.moviebox.R;
 
 import java.util.concurrent.ExecutionException;
 
-import static android.R.attr.id;
+import static com.longngo.moviebox.R.id.player;
 
 /**
  * Created by Admin on 13/10/2016.
  */
 
-public class QuickYTPlayActivity extends YouTubeBaseActivity {
+public class QuickYTPlayActivity extends YouTubeBaseActivity implements
+        YouTubePlayer.OnInitializedListener {
     private static final String TRAILER_URL = "TRAILER_URL";
-
+    String finalUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,10 +39,11 @@ public class QuickYTPlayActivity extends YouTubeBaseActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
+        finalUrl = url;
         YouTubePlayerView youTubePlayerView =
-                (YouTubePlayerView) findViewById(R.id.player);
+                (YouTubePlayerView) findViewById(player);
 
-        final String finalUrl = url;
+
         youTubePlayerView.initialize(BuildConfig.YOUTUBE_API_KEY,
                 new YouTubePlayer.OnInitializedListener() {
                     @Override
@@ -65,6 +68,17 @@ public class QuickYTPlayActivity extends YouTubeBaseActivity {
     }
     int getDataFromCallingIntent() {
         return getIntent().getIntExtra(TRAILER_URL, 0);
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        youTubePlayer.cueVideo(finalUrl);
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        Toast.makeText(this, "Error :( " + youTubeInitializationResult.toString(), Toast.LENGTH_LONG)
+                .show();
     }
 
     private class GetTrailer extends AsyncTask<Integer,String,String> {

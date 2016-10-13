@@ -26,6 +26,8 @@
         <activity
             android:name=".ui.activity.youtubeplayer.QuickYTPlayActivity"
             android:theme="@style/AppTheme.Translucent"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
             >
         </activity>
         <activity-alias

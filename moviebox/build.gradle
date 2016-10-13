@@ -64,5 +64,6 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.iarcuschin:simpleratingbar:0.1.3'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
 
 }
