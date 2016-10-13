@@ -1,6 +1,7 @@
 package com.longngo.moviebox.ui.activity.detail;
 
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,15 +9,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.BounceInterpolator;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
 import com.longngo.moviebox.common.DynamicHeightImageView;
 import com.longngo.moviebox.common.ElasticDragDismissFrameLayout;
 import com.longngo.moviebox.common.recyclerviewhelper.PlaceHolderDrawableHelper;
+import com.longngo.moviebox.ui.activity.Navigator;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.viewmodel.BaseVM;
 import com.longngo.moviebox.ui.viewmodel.MovieVM;
@@ -53,6 +58,8 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
     @Nullable
     @BindView(R.id.srbStar)
     SimpleRatingBar srbStart;
+    @BindView(R.id.flPlay)
+    FrameLayout flPlay;
 
     public static Intent getCallingIntent(Context context, BaseVM baseVM){
         Intent intent = new Intent(context, DetailActivity.class);
@@ -60,7 +67,7 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
         return intent;
     }
     private MovieVM getItemFromIntent(Intent intent){
-        return (MovieVM) getIntent().getSerializableExtra(MOVIE_ITEM);
+        return (MovieVM) intent.getSerializableExtra(MOVIE_ITEM);
     }
 
     @Override
@@ -73,13 +80,9 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
 
     }
     void setupUI(){
-        MovieVM movieVM = getItemFromIntent(getIntent());
-        Log.d(TAG, "setupUI: "+"https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getBackdropPath());
-        Log.d(TAG, "setupUI: "+"https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath());
+        final MovieVM movieVM = getItemFromIntent(getIntent());
         imageView.setRatio(1.5);
-//        Glide.with(this)
-//                .load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
-//                .into(imageView);
+
         if (imageView!=null) {
             Picasso.with(this).load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
                     .placeholder(PlaceHolderDrawableHelper.getBackgroundDrawable(movieVM.getMovie().getId()))
@@ -92,12 +95,20 @@ public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailV
                     .into(ivBackdropPath);
         }
 
+        flPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigator.navigateToYTPlayActivity(v.getContext(),movieVM.getMovie().getId());
+
+
+            }
+        });
 
 
         tvOverview.setText(movieVM.getMovie().getOverview());
         tvTitle.setText(movieVM.getMovie().getTitle());
-        tvReleaseDate.setText(Html.fromHtml("<b>Release Date: </b>"+movieVM.getMovie().getReleaseDate()+""));
-        tvPopularity.setText(Html.fromHtml("<b>Popularity: </b>"+movieVM.getMovie().getPopularity()+""));
+        tvReleaseDate.setText(Html.fromHtml("<font color=\"BLUE\"><b>Release Date: </b></font>"+movieVM.getMovie().getReleaseDate()+""));
+        tvPopularity.setText(Html.fromHtml("<font color=\"BLUE\"><b>Popularity: </b></font>"+movieVM.getMovie().getPopularity()+""));
         Log.d(TAG, "movieVM.getMovie().getVoteAverage() "+movieVM.getMovie().getVoteAverage());
 
         SimpleRatingBar.AnimationBuilder builder = srbStart.getAnimationBuilder()

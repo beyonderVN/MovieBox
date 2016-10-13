@@ -22,6 +22,12 @@
             android:theme="@style/AppTheme.Translucent">
 
         </activity>
+
+        <activity
+            android:name=".ui.activity.youtubeplayer.QuickYTPlayActivity"
+            android:theme="@style/AppTheme.Translucent"
+            >
+        </activity>
         <activity-alias
             android:name="laucher"
             android:targetActivity="com.longngo.moviebox.ui.activity.main.MainActivity">
