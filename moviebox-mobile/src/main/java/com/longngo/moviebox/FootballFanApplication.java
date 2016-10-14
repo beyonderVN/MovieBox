@@ -3,9 +3,11 @@ package com.longngo.moviebox;
 import android.app.Application;
 import android.content.Context;
 
-import com.longngo.moviebox.common.di.DaggerMainComponent;
-import com.longngo.moviebox.common.di.MainComponent;
-import com.longngo.moviebox.common.di.MainModule;
+
+import com.longngo.moviebox.di.DaggerMainComponent;
+import com.longngo.moviebox.di.MainComponent;
+import com.longngo.moviebox.di.MainModule;
+
 
 /**
  * Created by Long on 10/5/2016.

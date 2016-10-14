@@ -4,7 +4,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.longngo.moviebox.ui.viewmodel.LoadingMoreVM;
+import com.ngohoang.along.appcore.presentation.viewmodel.LoadingMoreVM;
+
 
 /**
  * Created by Long on 10/5/2016.

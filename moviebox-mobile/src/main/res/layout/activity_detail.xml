@@ -24,7 +24,7 @@
         android:layout_gravity="center_vertical"
         android:transitionName="@string/detail_image"
         >
-        <com.longngo.moviebox.common.DynamicHeightImageView
+        <com.ngohoang.along.appcore.common.DynamicHeightImageView
             android:id="@+id/ivHeader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         >
-                        <com.longngo.moviebox.common.DynamicHeightImageView
+                        <com.ngohoang.along.appcore.common.DynamicHeightImageView
                             android:id="@+id/ivBackdropPath"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

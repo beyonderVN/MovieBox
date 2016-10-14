@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.longngo.moviebox.R;
-import com.longngo.moviebox.common.DynamicHeightImageView;
-import com.longngo.moviebox.common.recyclerviewhelper.PlaceHolderDrawableHelper;
+
 import com.longngo.moviebox.ui.activity.Navigator;
-import com.longngo.moviebox.ui.viewmodel.MovieVM;
+
+import com.ngohoang.along.appcore.common.DynamicHeightImageView;
+import com.ngohoang.along.appcore.common.recyclerviewhelper.PlaceHolderDrawableHelper;
+import com.ngohoang.along.appcore.presentation.viewmodel.MovieVM;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;

@@ -16,18 +16,25 @@ import android.widget.TextView;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
-import com.longngo.moviebox.common.DynamicHeightImageView;
-import com.longngo.moviebox.common.ElasticDragDismissFrameLayout;
-import com.longngo.moviebox.common.recyclerviewhelper.PlaceHolderDrawableHelper;
+
 import com.longngo.moviebox.ui.activity.Navigator;
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
-import com.longngo.moviebox.ui.viewmodel.BaseVM;
-import com.longngo.moviebox.ui.viewmodel.MovieVM;
+
+import com.ngohoang.along.appcore.common.DynamicHeightImageView;
+import com.ngohoang.along.appcore.common.ElasticDragDismissFrameLayout;
+import com.ngohoang.along.appcore.common.recyclerviewhelper.PlaceHolderDrawableHelper;
+import com.ngohoang.along.appcore.presentation.presentor.detail.DetailPresentationModel;
+import com.ngohoang.along.appcore.presentation.presentor.detail.DetailPresenter;
+import com.ngohoang.along.appcore.presentation.presentor.detail.DetailView;
+import com.ngohoang.along.appcore.presentation.viewmodel.BaseVM;
+import com.ngohoang.along.appcore.presentation.viewmodel.MovieVM;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
+
+
 
 public class DetailActivity extends BaseActivity<DetailPresentationModel,DetailView,DetailPresenter> implements DetailView {
     private static final String TAG = "DetailActivity";

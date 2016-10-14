@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
-            <com.longngo.moviebox.common.DynamicHeightImageView
+            <com.ngohoang.along.appcore.common.DynamicHeightImageView
                 android:id="@+id/ivHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -61,7 +61,7 @@
                             android:id="@+id/flPlay"
                             android:layout_width="match_parent"
                             android:layout_height="150dp">
-                            <com.longngo.moviebox.common.DynamicHeightImageView
+                            <com.ngohoang.along.appcore.common.DynamicHeightImageView
                                 android:id="@+id/ivBackdropPath"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"

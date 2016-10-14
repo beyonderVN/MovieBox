@@ -7,8 +7,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.longngo.moviebox.R;
-import com.longngo.moviebox.common.DynamicHeightImageView;
-import com.longngo.moviebox.ui.viewmodel.MovieDetailVM;
+
+
+import com.ngohoang.along.appcore.common.DynamicHeightImageView;
+import com.ngohoang.along.appcore.presentation.viewmodel.MovieDetailVM;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -8,7 +8,7 @@ import android.content.Intent;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.longngo.moviebox.ui.activity.detail.DetailActivity;
 import com.longngo.moviebox.ui.activity.youtubeplayer.QuickYTPlayActivity;
-import com.longngo.moviebox.ui.viewmodel.BaseVM;
+import com.ngohoang.along.appcore.presentation.viewmodel.BaseVM;
 
 
 /**
@@ -16,7 +16,7 @@ import com.longngo.moviebox.ui.viewmodel.BaseVM;
  */
 
 public class Navigator {
-    public static void navigateToDetailActivity(Context context, BaseVM baseVM,ActivityOptions ops) {
+    public static void navigateToDetailActivity(Context context, BaseVM baseVM, ActivityOptions ops) {
         if (context != null) {
             Intent intentToLaunch = DetailActivity.getCallingIntent(context, baseVM);
 //            Intent intentToLaunch = DetailUsingOnlyRVActivity.getCallingIntent(context, baseVM);

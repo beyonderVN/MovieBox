@@ -86,7 +86,7 @@ public class QuickYTPlayActivity extends YouTubeBaseActivity implements
 
         @Override
         protected String doInBackground(Integer... params) {
-            return FootballFanApplication.getMainComponent().dataManager().getTrailer(params[0]);
+            return FootballFanApplication.getMainComponent().movieBoxService().getTrailer(params[0]);
         }
     }
 }

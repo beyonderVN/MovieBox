@@ -19,9 +19,13 @@ import android.widget.ViewAnimator;
 
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
-import com.longngo.moviebox.common.recyclerviewhelper.InfiniteScrollListener;
+
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
+import com.ngohoang.along.appcore.common.recyclerviewhelper.InfiniteScrollListener;
+import com.ngohoang.along.appcore.presentation.presentor.main.MainPresentationModel;
+import com.ngohoang.along.appcore.presentation.presentor.main.MainPresenter;
+import com.ngohoang.along.appcore.presentation.presentor.main.MainView;
 
 import butterknife.BindInt;
 import butterknife.BindView;

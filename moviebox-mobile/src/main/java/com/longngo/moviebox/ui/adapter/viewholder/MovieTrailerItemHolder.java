@@ -9,10 +9,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.longngo.moviebox.R;
-import com.longngo.moviebox.common.DynamicHeightImageView;
-import com.longngo.moviebox.common.recyclerviewhelper.PlaceHolderDrawableHelper;
+
 import com.longngo.moviebox.ui.activity.Navigator;
-import com.longngo.moviebox.ui.viewmodel.TrailerMovieVM;
+
+import com.ngohoang.along.appcore.common.DynamicHeightImageView;
+import com.ngohoang.along.appcore.common.recyclerviewhelper.PlaceHolderDrawableHelper;
+import com.ngohoang.along.appcore.presentation.viewmodel.TrailerMovieVM;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;

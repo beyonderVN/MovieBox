@@ -66,4 +66,5 @@ dependencies {
     compile files('libs/YouTubeAndroidPlayerApi.jar')
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
 
+    compile project(path: ':appcore')
 }

@@ -2,9 +2,10 @@ package com.longngo.moviebox.ui.activity.base;
 
 import android.support.annotation.NonNull;
 
-import com.longngo.moviebox.common.coremvp.MVPFragment;
-import com.longngo.moviebox.common.coremvp.MVPPresenter;
-import com.longngo.moviebox.common.coremvp.MVPView;
+
+import com.ngohoang.along.appcore.common.coremvp.MVPFragment;
+import com.ngohoang.along.appcore.common.coremvp.MVPPresenter;
+import com.ngohoang.along.appcore.common.coremvp.MVPView;
 
 import java.io.Serializable;
 
