@@ -37,7 +37,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
     @Override
     public void attachView(MainView mvpView, MainPresentationModel presentationModel) {
         super.attachView(mvpView, presentationModel);
-        fetchRepositoryFirst();
+
     }
 
     @Override
@@ -52,6 +52,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
         }
         showProcess();
         mSubscriptions.clear();
+        getPresentationModel().reset();
         Subscription subscription = competitionsRepository
                 .getMovieList(getPresentationModel().getNextPage())
                 .map(new Func1<List<Movie>, List<BaseVM>>() {
@@ -80,12 +81,14 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
                             Log.d(TAG, "onSuccess: "+competitions.size());
 
                             getPresentationModel().addAndCollapse(competitions);
-                            updateView();
+
                             getPresentationModel().setCurrentPage(getPresentationModel().getCurrentPage()+1);
                         } else {
                             Log.d(TAG, "onSuccess: is empty");
                         }
-                        showContent();
+                        getPresentationModel().stopLoadingMore();
+                        updateView();
+
                     }
                 });
         mSubscriptions.add(subscription);
@@ -148,6 +151,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
     public void updateView() {
         if(getMvpView()==null)return;
         getMvpView().updateView();
+
     }
 
     public void loadMore() {
