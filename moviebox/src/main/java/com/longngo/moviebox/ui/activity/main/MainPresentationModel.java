@@ -83,7 +83,7 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
         getVisitableList().clear();
         currentPage = 0;
         noMore =false;
-        loadingMore =false;
+        loadingMore =true;
         countNonFullSpanItem=0;
     }
     int currentPage = 0;
@@ -104,6 +104,7 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
     }
     public void stopLoadingMore() {
         if (!loadingMore) return;
+        if(getVisitableList().size()==0) return;
         getVisitableList().remove(getVisitableList().size() - 1);
         loadingMore = false;
     }

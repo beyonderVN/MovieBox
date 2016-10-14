@@ -137,10 +137,8 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     protected void onStart() {
         super.onStart();
         presenter.fixState(columnNum);
-        if(baseAdapter == null){
-            baseAdapter = new BaseAdapter(this, presenter.getPresentationModel());
-            listRV.setAdapter(baseAdapter);
-        }
+        presenter.fetchRepositoryFirst();
+
     }
 
     @Override
@@ -168,9 +166,16 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
 
     @Override
     public void updateView() {
-        baseAdapter.notifyDataSetChanged();
+        if(baseAdapter == null){
+            baseAdapter = new BaseAdapter(this, presenter.getPresentationModel());
+            listRV.setAdapter(baseAdapter);
+        }else{
+            baseAdapter.notifyDataSetChanged();
+        }
+
         listRV.setLayoutFrozen(false);
         swipeRefresh.setRefreshing(false);
+        showContent();
     }
 
 
