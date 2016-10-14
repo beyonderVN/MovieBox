@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#bababa</color>
+    <color name="colorPrimaryDark">#616161</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="gray">#cacaca</color>
+    <color name="gray_alpha">#443b3b3b</color>
+    <color name="blue_alpha">#a600054e</color>
+    <color name="white">#ffffff</color>
+    <color name="tran">#00ffffff</color>
+
+    <color name="scrim">#86323232</color>
+    <color name="black">#000000</color>
+    <color name="statusbar">#9a1b1b1b</color>
+    <color name="yellow">#c1ae31</color>
+    <color name="detail_bg">#a0000000</color>
+</resources>
