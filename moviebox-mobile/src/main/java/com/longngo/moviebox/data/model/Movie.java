@@ -308,5 +308,17 @@ public class Movie implements Serializable{
         this.voteAverage = voteAverage;
     }
 
+//    @Override public String toString() {
+//        StringBuilder stringBuilder = new StringBuilder();
+//
+//        stringBuilder.append("***** User Entity Details *****\n");
+//        stringBuilder.append("id=" + this.getProduct_id() + "\n");
+//        stringBuilder.append("cover url=" + this.getProduct_image() + "\n");
+//        stringBuilder.append("name=" + this.getProduct_name() + "\n");
+//        stringBuilder.append("description=" + this.getProduct_des() + "\n");
+//        stringBuilder.append("*******************************");
+//
+//        return stringBuilder.toString();
+//    }
 
 }
