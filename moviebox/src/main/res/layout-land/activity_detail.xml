@@ -33,7 +33,7 @@
                 android:contentDescription=""
                 android:transitionName="@string/detail_image"
                 android:layout_weight="1"
-                android:scaleType="fitCenter"
+                android:scaleType="fitXY"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
             <android.support.v4.widget.NestedScrollView
@@ -60,7 +60,7 @@
                         <FrameLayout
                             android:id="@+id/flPlay"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="150dp">
                             <com.longngo.moviebox.common.DynamicHeightImageView
                                 android:id="@+id/ivBackdropPath"
                                 android:layout_width="match_parent"

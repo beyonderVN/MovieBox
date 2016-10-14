@@ -71,7 +71,7 @@ public class MovieBoxService {
             JsonArray json = jsonObject.getAsJsonArray("youtube");
 
             if (json.size() > 0) {
-                result =  json.get(0).toString();// parse the date instead of toString()
+                result =  json.get(0).getAsJsonObject().get("source").getAsString();// parse the date instead of toString()
                 Log.d(TAG, "result: "+result);
             }
 
