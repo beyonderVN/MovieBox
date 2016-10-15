@@ -85,7 +85,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
                     @Override
                     public void run() {
                         Log.d("Swipe", "Refreshing Number");
-                        presenter.refreshData();
+                        presenter.fetchRepositoryFirst(columnNum);
                     }
                 }, 500);
 
@@ -119,7 +119,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
             public void onLoadMore() {
                 Log.d(TAG, "onLoadMore: ");
                 try {
-                    presenter.loadMore();
+                    presenter.fetchMore();
                 } catch (Exception e) {
                     e.getStackTrace();
                 }
@@ -140,9 +140,7 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     @Override
     protected void onStart() {
         super.onStart();
-        presenter.fixState(columnNum);
-        presenter.fetchRepositoryFirst();
-
+        presenter.fetchRepository(columnNum);
     }
 
     @Override
@@ -159,12 +157,14 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
 
     @Override
     public void showProcess() {
+        if(resultAnimator.getDisplayedChild()== POSITION_PROGRESS_VIEW) return;
         resultAnimator.setDisplayedChild(POSITION_PROGRESS_VIEW);
         swipeRefresh.setRefreshing(false);
     }
 
     @Override
     public void showContent() {
+        if(resultAnimator.getDisplayedChild()== POSITION_CONTENT_VIEW) return;
         resultAnimator.setDisplayedChild(POSITION_CONTENT_VIEW);
     }
 

@@ -43,18 +43,20 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
     }
 
     @Override
+    public void detachView() {
+        super.detachView();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         mSubscriptions.unsubscribe();
     }
 
-    public void fetchRepositoryFirst(){
-        if (!getPresentationModel().isShouldFetchRepositories()) {
-            return;
-        }
+    public void fetchRepositoryFirst(int column){
         showProcess();
         mSubscriptions.clear();
-        getPresentationModel().reset();
+        getPresentationModel().reset(column);
         Subscription subscription = competitionsRepository
                 .getMovieList(getPresentationModel().getNextPage())
                 .map(new Func1<List<Movie>, List<BaseVM>>() {
@@ -96,7 +98,7 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
         mSubscriptions.add(subscription);
     }
     public void fetchMore(){
-
+        startLoadingMore();
         mSubscriptions.clear();
         Subscription subscription = competitionsRepository
                 .getMovieList(getPresentationModel().getNextPage())
@@ -156,11 +158,6 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
 
     }
 
-    public void loadMore() {
-        startLoadingMore();
-        fetchMore();
-    }
-
     private void startLoadingMore() {
         getPresentationModel().startLoadingMore();
         updateView();
@@ -169,13 +166,18 @@ public class MainPresenter extends SimpleMVPPresenter<MainView,MainPresentationM
         getPresentationModel().stopLoadingMore();
         updateView();
     }
-    public void refreshData() {
-        getPresentationModel().reset();
-        fetchRepositoryFirst();
-    }
 
     public void fixState(int column) {
         getPresentationModel().stopLoadingMore();
         getPresentationModel().fixLayout(column);
+        updateView();
+    }
+
+    public void fetchRepository(int column) {
+        if (!getPresentationModel().isShouldFetchRepositories()) {
+            fixState(column);
+        }else {
+            fetchRepositoryFirst(column);
+        }
     }
 }

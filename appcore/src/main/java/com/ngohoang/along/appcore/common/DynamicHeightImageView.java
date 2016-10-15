@@ -57,8 +57,6 @@ public class DynamicHeightImageView extends ImageView {
         } else {
 
             if (!(getDrawable() == null)) {
-                Log.d(TAG, "getDrawable().getIntrinsicHeight(): " + getDrawable().getIntrinsicHeight());
-                Log.d(TAG, "getIntrinsicWidth(): " + getDrawable().getIntrinsicWidth());
 
                 int width = getDrawable().getIntrinsicWidth();
                 int height = getDrawable().getIntrinsicHeight();

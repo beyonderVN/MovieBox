@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'android-apt'
+apply from: '../quality_tools/findbugs.gradle'
+apply plugin: 'com.fernandocejas.frodo'
 
 android {
     compileSdkVersion 24
@@ -25,4 +27,10 @@ dependencies {
     compile 'com.google.android.support:wearable:2.0.0-alpha2'
     compile 'com.google.android.gms:play-services-wearable:9.4.0'
     compile 'com.google.android.wearable:wearable:2.0.0-alpha2'
+    compile 'com.google.dagger:dagger:2.5'
+    compile 'com.google.code.findbugs:annotations:2.0.3'
+    apt 'com.google.dagger:dagger-compiler:2.5'
+
+    compile project(path: ':appcore')
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

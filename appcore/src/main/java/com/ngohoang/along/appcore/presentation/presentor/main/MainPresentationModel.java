@@ -80,12 +80,13 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
         return noMore;
     }
 
-    public void reset() {
+    public void reset(int column) {
         getVisitableList().clear();
         currentPage = 0;
         noMore =false;
         loadingMore =true;
         countNonFullSpanItem=0;
+        this.column = column;
     }
     int currentPage = 0;
 

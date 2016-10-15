@@ -6,11 +6,16 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     tools:context="com.longngo.moviebox.wear.MainActivity" tools:deviceIds="wear">
 
-    <TextView android:id="@+id/text" android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_world" app:layout_box="all" />
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:layout_box="left|bottom|right">
 
-    <TextView android:id="@+id/clock" android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start" android:textColor="@android:color/white"
-        app:layout_box="all" />
-
+        <android.support.wearable.view.WearableListView
+            android:id="@+id/wearable_list"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        </android.support.wearable.view.WearableListView>
+    </FrameLayout>
 </android.support.wearable.view.BoxInsetLayout>
