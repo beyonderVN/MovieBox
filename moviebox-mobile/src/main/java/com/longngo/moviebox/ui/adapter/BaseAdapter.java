@@ -23,7 +23,7 @@ import javax.inject.Inject;
  */
 
 public class BaseAdapter extends RecyclerView.Adapter<BaseViewHolder<BaseVM>> {
-    @Inject
+
     public HolderFactory holderFactory = new HolderFactoryImpl();
     private List<BaseVM> list;
 
