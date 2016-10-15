@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.ngohoang.along.appcore.common.coremvp.MVPPresenter;
 import com.ngohoang.along.appcore.common.coremvp.MVPView;
+import com.ngohoang.along.appcore.common.coremvp.MVPWearActivity;
 
 import java.io.Serializable;
 
@@ -16,7 +17,7 @@ import javax.inject.Inject;
  */
 
 public abstract class BaseActivity<M extends Serializable, V extends MVPView, P extends MVPPresenter<V, M>>
-extends MVPActivity<M,V,P> {
+extends MVPWearActivity<M,V,P> {
     @Inject protected P presenter;
 
     @NonNull

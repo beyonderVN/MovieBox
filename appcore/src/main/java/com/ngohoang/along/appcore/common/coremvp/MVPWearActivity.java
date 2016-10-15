@@ -14,30 +14,25 @@
  *  limitations under the License.
  */
 
-package com.longngo.moviebox.wear;
+package com.ngohoang.along.appcore.common.coremvp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.wearable.activity.WearableActivity;
-
-import com.ngohoang.along.appcore.common.coremvp.MVPPresenter;
-import com.ngohoang.along.appcore.common.coremvp.MVPView;
-import com.ngohoang.along.appcore.common.coremvp.MVPViewDelegate;
 
 import java.io.Serializable;
 
-public abstract class MVPActivity<M extends Serializable, V extends MVPView, P extends MVPPresenter<V, M>>
+public abstract class MVPWearActivity<M extends Serializable, V extends MVPView, P extends MVPPresenter<V, M>>
     extends WearableActivity implements MVPView {
 
     private MVPViewDelegate<M, V, P> mvpDelegate = new MVPViewDelegate<M, V, P>() {
         @NonNull @Override protected P createPresenter() {
-            return MVPActivity.this.createPresenter();
+            return MVPWearActivity.this.createPresenter();
         }
 
         @NonNull @Override protected M createPresentationModel() {
-            return MVPActivity.this.createPresentationModel();
+            return MVPWearActivity.this.createPresentationModel();
         }
     };
 

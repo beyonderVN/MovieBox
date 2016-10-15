@@ -64,4 +64,5 @@ dependencies {
     compile files('libs/YouTubeAndroidPlayerApi.jar')
 
     testCompile 'junit:junit:4.12'
+    compile 'com.google.android.support:wearable:2.0.0-alpha2'
 }
