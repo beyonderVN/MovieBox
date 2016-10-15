@@ -29,6 +29,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -67,4 +68,7 @@ dependencies {
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
 
     compile project(path: ':appcore')
+
+//    compile(name:'library-release', ext:'aar')
+
 }

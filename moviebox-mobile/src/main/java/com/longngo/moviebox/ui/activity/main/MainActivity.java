@@ -1,9 +1,16 @@
 package com.longngo.moviebox.ui.activity.main;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,10 +29,13 @@ import com.longngo.moviebox.R;
 
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
+import com.ngohoang.along.appcore.common.AchievementUnlocked;
 import com.ngohoang.along.appcore.common.recyclerviewhelper.InfiniteScrollListener;
 import com.ngohoang.along.appcore.presentation.presentor.main.MainPresentationModel;
 import com.ngohoang.along.appcore.presentation.presentor.main.MainPresenter;
 import com.ngohoang.along.appcore.presentation.presentor.main.MainView;
+
+
 
 import butterknife.BindInt;
 import butterknife.BindView;
@@ -46,13 +56,34 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
     ViewAnimator resultAnimator;
 
     BaseAdapter baseAdapter;
+    public void androidM() {
+        Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, 123);
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setupUI();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+
+            if (!Settings.canDrawOverlays(getApplicationContext()))
+                new AlertDialog.Builder(this)
+
+                        .setMessage("Starting from Android 6, " + getResources().getString(R.string.app_name) + " needs permission to display notifications. Click enable to proceed")
+                        .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                androidM();
+                            }
+                        })
+
+                        .show();
+
+        }
     }
     void setupUI(){
         setupRV();
@@ -180,6 +211,15 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
         listRV.setLayoutFrozen(false);
         swipeRefresh.setRefreshing(false);
         showContent();
+        AchievementUnlocked test=
+                new AchievementUnlocked(this)
+                        .setTitle("Lilac and Gooseberries")
+                        .setSubtitleColor(0x80ffffff)
+                        .setSubTitle("Find the sorceress")
+                        .setBackgroundColor(Color.parseColor("#C2185B"))
+                        .setTitleColor(0xffffffff)
+                        .setIcon(getDrawable(R.drawable.ic_android_white_24dp)).isLarge(false).build();
+        test.show();
     }
 
 
