@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.ngohoang.along.appcore.common.ElasticDragDismissFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tran"
+
+    android:padding="16dp"
+    android:transitionGroup="false"
+    app:dragDismissDistance="168dp"
+    app:dragDismissScale="0.95"
+
+    tools:context="com.longngo.moviebox.ui.activity.main.MainActivity">
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvMovieDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingTop="53dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+
+
+</com.ngohoang.along.appcore.common.ElasticDragDismissFrameLayout>
