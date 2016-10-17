@@ -30,11 +30,7 @@ public class DetailPresenter extends SimpleMVPPresenter<DetailView,DetailPresent
     private CompositeSubscription mSubscriptions = new CompositeSubscription();
 
     private MoviesRepository competitionsRepository;
-//    @Inject
-//    DetailPresenter(BaseSchedulerProvider baseSchedulerProvider, MoviesRepository competitionsRepository) {
-//        this.baseSchedulerProvider = baseSchedulerProvider;
-//        this.competitionsRepository = competitionsRepository;
-//    }
+
     @Inject
     DetailPresenter() {
 

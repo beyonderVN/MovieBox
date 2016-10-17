@@ -1,16 +1,11 @@
 package com.longngo.moviebox.wear.adapter.holder;
 
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import com.longngo.moviebox.wear.R;
-import com.ngohoang.along.appcore.common.DynamicHeightImageView;
 import com.ngohoang.along.appcore.presentation.viewmodel.MovieDetailVM;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,9 +35,8 @@ public class MovieDetailHolder extends BaseViewHolder<MovieDetailVM> {
     public  void bind(MovieDetailVM item) {
         MovieDetailVM movieVM = item;
 
-        Glide.with(imageView.getContext())
+        Picasso.with(imageView.getContext())
                 .load("https://image.tmdb.org/t/p/w342"+movieVM.getMovie().getPosterPath())
-                .asBitmap()
                 .into(imageView);
 
 
