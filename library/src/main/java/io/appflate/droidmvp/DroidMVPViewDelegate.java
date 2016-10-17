@@ -19,8 +19,10 @@ package io.appflate.droidmvp;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.Serializable;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Class that makes it possible to write your own custom MVP Views that will fit in the DroidMVP structure.

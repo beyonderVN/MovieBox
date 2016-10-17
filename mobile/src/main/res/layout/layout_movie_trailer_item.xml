@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    app:cardCornerRadius="@dimen/cardview_default_radius"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/cardview_shadow_end_color"
+    android:id="@+id/wrap"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.ngohoang.along.appcore.common.DynamicHeightImageView
+            android:id="@+id/ivBackground"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription=""
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_play_circle_outline_white_48dp"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_alpha"
+            android:padding="@dimen/tv_padding_medium"
+            android:layout_gravity="bottom"
+            android:textSize="@dimen/tv_textsize_large"
+            android:textColor="@color/white"
+            />
+        <com.iarcuschin.simpleratingbar.SimpleRatingBar
+            android:id="@+id/srbStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srb_starSize="12dp"
+            app:srb_numberOfStars="6"
+            app:srb_stepSize="0.1"
+            app:srb_borderColor="@color/yellow"
+            app:srb_fillColor="@color/yellow"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"
+            />
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

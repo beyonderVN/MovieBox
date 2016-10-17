@@ -1,1 +1,1 @@
-include ':moviebox-mobile', ':wear'
+include ':mobile', ':wear', ':appcore'
