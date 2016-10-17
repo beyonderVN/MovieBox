@@ -59,9 +59,7 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:$OKHTTP_VERSION"
     compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
     compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
 
-    compile files('libs/YouTubeAndroidPlayerApi.jar')
 
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.support:wearable:2.0.0-alpha2'
