@@ -3,18 +3,10 @@ package com.longngo.moviebox.di;
 import android.content.Context;
 
 import com.longngo.moviebox.FootballFanApplication;
-import com.longngo.moviebox.ui.adapter.vmfactory.HolderFactory;
-import com.longngo.moviebox.ui.adapter.vmfactory.HolderFactoryImpl;
 import com.ngohoang.along.appcore.common.schedulers.BaseSchedulerProvider;
 import com.ngohoang.along.appcore.common.schedulers.SchedulerProvider;
-import com.ngohoang.along.appcore.data.backend.MovieBoxService;
 import com.ngohoang.along.appcore.data.backend.MovieBoxServiceApi;
 import com.ngohoang.along.appcore.data.backend.MovieBoxServiceFactory;
-import com.ngohoang.along.appcore.data.source.MoviesDataSource;
-import com.ngohoang.along.appcore.data.source.MoviesRepository;
-import com.ngohoang.along.appcore.data.source.local.MoviesLocalDataSource;
-import com.ngohoang.along.appcore.data.source.remote.MoviesRemoteDataSource;
-
 
 import javax.inject.Singleton;
 
@@ -49,11 +41,11 @@ public class MainModule {
         return schedulerProvider;
     }
 
-    @Provides
-    @Singleton
-    HolderFactory provideHolderFactory(HolderFactoryImpl holderFactory) {
-        return holderFactory;
-    }
+//    @Provides
+//    @Singleton
+//    HolderFactory provideHolderFactory(HolderFactoryImpl holderFactory) {
+//        return holderFactory;
+//    }
 //    @Provides
 //    @Singleton
 //    MoviesRemoteDataSource provideMoviesRemoteDataSource(MoviesRemoteDataSource competitionsDataSource) {

@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +30,6 @@ import android.widget.ViewAnimator;
 
 import com.longngo.moviebox.FootballFanApplication;
 import com.longngo.moviebox.R;
-
 import com.longngo.moviebox.ui.activity.base.BaseActivity;
 import com.longngo.moviebox.ui.adapter.BaseAdapter;
 import com.ngohoang.along.appcore.common.AchievementUnlocked;
@@ -34,8 +37,6 @@ import com.ngohoang.along.appcore.common.recyclerviewhelper.InfiniteScrollListen
 import com.ngohoang.along.appcore.presentation.presentor.main.MainPresentationModel;
 import com.ngohoang.along.appcore.presentation.presentor.main.MainPresenter;
 import com.ngohoang.along.appcore.presentation.presentor.main.MainView;
-
-
 
 import butterknife.BindInt;
 import butterknife.BindView;
@@ -54,6 +55,12 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
 
     @BindView(R.id.viewAnimator)
     ViewAnimator resultAnimator;
+
+    private DrawerLayout mDrawer;
+    private Toolbar toolbar;
+    private NavigationView nvDrawer;
+    private ActionBarDrawerToggle drawerToggle;
+
 
     BaseAdapter baseAdapter;
     public void androidM() {
@@ -84,14 +91,61 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
                         .show();
 
         }
+
+
     }
     void setupUI(){
         setupRV();
         setupToolBar();
         setupSwipeRefreshLayout();
         setupStatusBar();
-    }
 
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        nvDrawer.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
+    }
+    public void selectDrawerItem(MenuItem menuItem) {
+//        // Create a new fragment and specify the fragment to show based on nav item clicked
+//        Fragment fragment = null;
+//        Class fragmentClass;
+//        switch(menuItem.getItemId()) {
+//            case R.id.nav_first_fragment:
+//                fragmentClass = FirstFragment.class;
+//                break;
+//            case R.id.nav_second_fragment:
+//                fragmentClass = SecondFragment.class;
+//                break;
+//            case R.id.nav_third_fragment:
+//                fragmentClass = ThirdFragment.class;
+//                break;
+//            default:
+//                fragmentClass = FirstFragment.class;
+//        }
+//
+//        try {
+//            fragment = (Fragment) fragmentClass.newInstance();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        // Insert the fragment by replacing any existing fragment
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+//
+//        // Highlight the selected item has been done by NavigationView
+//        menuItem.setChecked(true);
+//        // Set action bar title
+//        setTitle(menuItem.getTitle());
+//        // Close the navigation drawer
+//        mDrawer.closeDrawers();
+    }
     private void setupStatusBar() {
         Window window = getWindow();
 
@@ -240,6 +294,9 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
         //noinspection SimplifiableIfStatement
 
         switch (id){
+            case android.R.id.home:
+                mDrawer.openDrawer(GravityCompat.START);
+                return true;
             case R.id.action_search:
                 Toast.makeText(this, "R.id.action_search", Toast.LENGTH_SHORT).show();
                 return true;
@@ -249,5 +306,13 @@ public class MainActivity extends BaseActivity<MainPresentationModel,MainView,Ma
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    // `onPostCreate` called when activity start-up is complete after `onStart()`
+    // NOTE! Make sure to override the method with only a single `Bundle` argument
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
     }
 }

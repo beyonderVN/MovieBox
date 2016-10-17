@@ -32,11 +32,11 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
     public void addAndCollapse(BaseVM baseVM){
 
         if (countNonFullSpanItem%column==0){
-            Log.d(TAG, "countNonFullSpanItem%2 "+countNonFullSpanItem);
+//            Log.d(TAG, "countNonFullSpanItem%2 "+countNonFullSpanItem);
             visitableList.add(baseVM);
             if(!baseVM.isFullSpan()){
                 countNonFullSpanItem++;
-                Log.d(TAG, "countNonFullSpanItem: "+countNonFullSpanItem);
+//                Log.d(TAG, "countNonFullSpanItem: "+countNonFullSpanItem);
             }
         }else{
             if(baseVM.isFullSpan()){
@@ -48,7 +48,7 @@ public class MainPresentationModel extends BasePresentationModel<BaseVM> {
                     if(!visitableList.get(i).isFullSpan()){
                         visitableList.add(i+1,baseVM);
                         countNonFullSpanItem++;
-                        Log.d(TAG, "countNonFullSpanItem: "+countNonFullSpanItem);
+//                        Log.d(TAG, "countNonFullSpanItem: "+countNonFullSpanItem);
                         break;
                     }
                 }

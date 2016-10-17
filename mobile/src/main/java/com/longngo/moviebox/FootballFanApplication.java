@@ -3,7 +3,6 @@ package com.longngo.moviebox;
 import android.app.Application;
 import android.content.Context;
 
-
 import com.longngo.moviebox.di.DaggerMainComponent;
 import com.longngo.moviebox.di.MainComponent;
 import com.longngo.moviebox.di.MainModule;
@@ -16,7 +15,7 @@ import com.longngo.moviebox.di.MainModule;
 public class FootballFanApplication extends Application {
 
     public static Context mContext;
-    static MainComponent mainComponent;
+    static MainComponent applicationComponent;
 
     @Override
     public void onCreate() {
@@ -24,14 +23,15 @@ public class FootballFanApplication extends Application {
         mContext = getApplicationContext();
         setupGraph();
     }
+
     void setupGraph(){
-        mainComponent = DaggerMainComponent.builder()
+        applicationComponent = DaggerMainComponent.builder()
                 .mainModule(new MainModule(this))
                 .build();
 
     }
 
     public static MainComponent getMainComponent() {
-        return mainComponent;
+        return applicationComponent;
     }
 }

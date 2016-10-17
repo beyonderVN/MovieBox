@@ -2,7 +2,6 @@ package com.longngo.moviebox.di;
 
 import android.content.Context;
 
-
 import com.longngo.moviebox.ui.activity.detail.DetailActivity;
 import com.longngo.moviebox.ui.activity.detail.DetailUsingOnlyRVActivity;
 import com.longngo.moviebox.ui.activity.main.MainActivity;
@@ -20,6 +19,8 @@ import dagger.Component;
 public interface MainComponent {
     Context context();
     MovieBoxService movieBoxService();
+
+//    ActivityModule plus(ActivityModule homeModule);
     void inject(MainActivity mainActivity);
 
 
