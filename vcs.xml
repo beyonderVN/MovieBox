@@ -58,6 +58,10 @@
           <option name="url" value="https://github.com/GroupTryHard/AutumWings.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/klinker24/Talon-for-Twitter.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="D:\Project\" />
